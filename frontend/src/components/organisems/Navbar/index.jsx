@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import TopBar from "../../molecules/TopBar";
 
 function Navbar() {
@@ -87,9 +88,9 @@ function Navbar() {
                 <div className="flex grow shrink basis-0 h-[59px]">
                     <div className="hidden min-[940px]:contents">
                         <div className="flex text-center h-full">
-                            <a
+                            <Link
                                 className="relative border-l border-[#dee1ea] font-400 text-[16px] no-underline after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[#213875] after:scale-y-0 hover:after:scale-y-[100%] after:origin-top hover:after:origin-bottom after:transition-transform after:duration-[700ms] after:ease-[cubic-bezier(0.19,1,0.22,1)] after:delay-0"
-                                href="./login.html"
+                                to="/login"
                             >
                                 <div
                                     className="relative grid place-items-center w-[100px] h-full py-0 px-[15px] text-[#213875] hover:text-[#ffffff] z-10"
@@ -98,7 +99,7 @@ function Navbar() {
                                         className="text-center w-full overflow-hidden text-ellipsis leading-[22px]"
                                     >Login</span>
                                 </div>
-                            </a>
+                            </Link>
                             <div
                                 className="flex items-center h-full border-l mb-[1em] py-0 px-[24px] cursor-pointer text-[#213875]"
                             >
