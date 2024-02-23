@@ -1,13 +1,14 @@
+import PopularCategory from "../components/organisems/PopularCategory";
 import HomeLayouts from "../layouts/HomeLayouts";
 
 function Homepage() {
-    return ( 
-        <>
-            <HomeLayouts>
-                <h1>Ini isi</h1>
-            </HomeLayouts>
-        </>
-     );
+  return (
+    <>
+      <HomeLayouts>
+        <PopularCategory />
+      </HomeLayouts>
+    </>
+  );
 }
 
 export default Homepage;
