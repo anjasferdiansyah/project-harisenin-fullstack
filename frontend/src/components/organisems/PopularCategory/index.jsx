@@ -43,9 +43,10 @@ const PopularCategory = () => {
   const scroller = useRef(null);
 
   useEffect(() => {
-    scroller.current.addEventListener("scroll", handleScroll);
+    const currentScroller = scroller.current;
+    currentScroller.addEventListener("scroll", handleScroll);
     return () => {
-      scroller.current.removeEventListener("scroll", handleScroll);
+      currentScroller.removeEventListener("scroll", handleScroll);
     };
   }, [scroller]);
   const handleLeft = () => {
