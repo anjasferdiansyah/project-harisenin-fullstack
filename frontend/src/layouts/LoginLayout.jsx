@@ -27,7 +27,7 @@ function LoginLayout(){
                     <h1 className="text-3xl pb-8 font-extrabold md:text-5xl w-full">New Customer</h1>
                     <p className="w-full text-sm md:text-md font-medium">Creating an account has many advantages: a faster ordering process, tracking orders and more.</p>
             
-                    <a href="register.html" className="mt-4 border p-3 flex justify-center bg-[#213775] text-white text-xs uppercase tracking-[0.18em] w-full relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100  before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0">Create An Account</a>
+                    <a href="/register" className="mt-4 border p-3 flex justify-center bg-[#213775] text-white text-xs uppercase tracking-[0.18em] w-full relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100  before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0">Create An Account</a>
             </div>
         </main>
         </>
