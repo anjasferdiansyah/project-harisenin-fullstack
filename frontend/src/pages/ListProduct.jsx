@@ -1,9 +1,23 @@
+import { useEffect, useState } from "react";
 import ListProductCard from "../components/atoms/ListProductCard";
 import ListCategoryCard from "../components/atoms/ListProductCard";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 
 const ListProducts = () => {
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    const response = await fetch("/src/data/listProducts.json");
+    const json = await response.json();
+    console.log(json.data);
+    setData(json.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -19,10 +33,14 @@ const ListProducts = () => {
           </p>
         </div>
         <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 p-4 md:px-10">
-          <ListProductCard />
-          <ListProductCard />
-          <ListProductCard />
-          <ListProductCard />
+          {data.map((item, i) => (
+            <ListProductCard
+              key={i}
+              listImage={item.listImage}
+              title={item.title}
+              price={item.price}
+            />
+          ))}
         </div>
       </section>
       <Footer />

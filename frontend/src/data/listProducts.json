@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Jaket Hoodie",
+      "price": 20000,
+      "listImage": [
+        "/img/kategori3.webp",
+        "/img/kategori4.webp",
+        "/img/kategori5.webp"
+      ],
+      "desc": "lorem ipsum dolor sit amet"
+    }
+  ]
+}
