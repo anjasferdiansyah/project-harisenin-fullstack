@@ -4,7 +4,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import { useRef } from "react";
 
-const ListProductSlider = () => {
+const ListProductSlider = ({ listImage }) => {
+  console.log(listImage[0]);
+
   const swiperContainerRef = useRef();
 
   const handlePrev = () => {
@@ -58,26 +60,16 @@ const ListProductSlider = () => {
         className=""
         speed={200}
       >
-        <SwiperSlide className="relative aspect-[3/2] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[url('https://source.unsplash.com/600x800?jeans')] after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]">
-          <img
-            src="https://source.unsplash.com/600x800?clothes"
-            alt=""
-            className="object-cover"
-          />
+        <SwiperSlide
+          className={`relative aspect-[3/2] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[url(${listImage[1]})] after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]`}
+        >
+          <img src={listImage[0]} alt="" className="object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            src="https://source.unsplash.com/600x800?jeans"
-            alt=""
-            className="object-cover"
-          />
+          <img src={listImage[1]} alt="" className="object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-          <img
-            src="https://source.unsplash.com/600x800?shoes"
-            alt=""
-            className="object-cover"
-          />
+          <img src={listImage[2]} alt="" className="object-cover" />
         </SwiperSlide>
       </Swiper>
     </div>
