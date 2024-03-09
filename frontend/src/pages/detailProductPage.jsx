@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -10,9 +10,26 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Button from "../components/molecules/Footer/Button";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
+import { useParams } from "react-router-dom";
 
 const DetailProductPage = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  const fetchData = async () => {
+    const response = await fetch("/src/data/listProducts.json");
+    const json = await response.json();
+
+    const findData = json.data.find((item) => item.id == parseInt(id));
+    setData(findData);
+  };
+  console.log(data);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -35,21 +52,21 @@ const DetailProductPage = () => {
           >
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?clothes"
+                src={data && data.listImage[0]}
                 alt=""
                 className="object-cover"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?jeans"
+                src={data && data.listImage[1]}
                 alt=""
                 className="object-cover"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?shoes"
+                src={data && data.listImage[2]}
                 alt=""
                 className="object-cover"
               />
@@ -67,21 +84,21 @@ const DetailProductPage = () => {
           >
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?clothes"
+                src={data && data.listImage[0]}
                 alt="product-images"
                 className="rounded"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?jeans"
+                src={data && data.listImage[1]}
                 alt="product-images"
                 className="rounded"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://source.unsplash.com/600x800?shoes"
+                src={data && data.listImage[2]}
                 alt="product-images"
                 className="rounded"
               />
@@ -89,8 +106,8 @@ const DetailProductPage = () => {
           </Swiper>
         </div>
         <div className="p-5 md:max-w-xl max-w-sm ">
-          <div className="text-xl font-bold">Judul Product</div>
-          <div className="text-xl font-bold">Rp. 300.000</div>
+          <div className="text-xl font-bold">{data && data.title}</div>
+          <div className="text-xl font-bold">{data && data.price}</div>
           <div className="flex gap-2">
             <Button classname="bg-black text-white px-3 py-1 w-full rounded">
               Add to cart
@@ -100,12 +117,7 @@ const DetailProductPage = () => {
             </Button>
           </div>
           <div className="text-sm ">Detail</div>
-          <div className="text-sm ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-            perspiciatis eos modi consequatur sint a voluptate debitis quia
-            temporibus iure? Eaque eos eum dolorum sed debitis libero assumenda
-            iure error?
-          </div>
+          <div className="text-sm ">{data && data.desc}</div>
         </div>
       </div>
       <Footer />

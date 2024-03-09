@@ -10,6 +10,17 @@
         "/img/kategori5.webp"
       ],
       "desc": "lorem ipsum dolor sit amet"
+    },
+    {
+      "id": 2,
+      "title": "Jaket mahal",
+      "price": 30000,
+      "listImage": [
+        "/img/kategori3.webp",
+        "/img/kategori4.webp",
+        "/img/kategori5.webp"
+      ],
+      "desc": "lorem ipsum dolor sit ametsasasa"
     }
   ]
 }
