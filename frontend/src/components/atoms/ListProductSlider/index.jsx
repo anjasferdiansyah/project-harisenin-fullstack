@@ -1,9 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/effect-fade";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const ListProductSlider = () => {
   const swiperContainerRef = useRef();
@@ -17,7 +16,7 @@ const ListProductSlider = () => {
   };
 
   return (
-    <div className="transition-all ease-in duration-75">
+    <div className="transition-all ease-in duration-75 object-cover">
       <button
         className={`text-gray-500 hover:bg-gray-200/50 p-2 absolute top-1/2 left-0 translate-x-[-80%] md:group-hover:translate-x-0 transition-transform ease-in duration-75 z-10`}
         onClick={handlePrev}
@@ -53,20 +52,33 @@ const ListProductSlider = () => {
         navigation
         cssMode
         mousewheel
+        draggable
         modules={[Navigation]}
         spaceBetween={0}
         slidesPerView={1}
         className=""
         speed={200}
       >
-        <SwiperSlide className="relative group">
-          <img src="https://source.unsplash.com/600x800?clothes" alt="" />
+        <SwiperSlide className="relative aspect-[3/2] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[url('https://source.unsplash.com/600x800?jeans')] after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]">
+          <img
+            src="https://source.unsplash.com/600x800?clothes"
+            alt=""
+            className="object-cover"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://source.unsplash.com/600x800?jeans" alt="" />
+          <img
+            src="https://source.unsplash.com/600x800?jeans"
+            alt=""
+            className="object-cover"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://source.unsplash.com/600x800?shoes" alt="" />
+          <img
+            src="https://source.unsplash.com/600x800?shoes"
+            alt=""
+            className="object-cover"
+          />
         </SwiperSlide>
       </Swiper>
     </div>
