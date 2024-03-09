@@ -49,7 +49,6 @@ const ListProductSlider = () => {
       </button>
       <Swiper
         ref={swiperContainerRef}
-        navigation
         cssMode
         mousewheel
         draggable
