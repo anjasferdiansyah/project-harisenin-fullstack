@@ -3,9 +3,10 @@ import Navbar from "../components/organisems/Navbar";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import bcrypt from 'bcryptjs';
-
+import { useNavigate } from "react-router-dom";
 
 function LoginLayout(){
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -32,7 +33,7 @@ function LoginLayout(){
 
             if (email === storedEmail && bcrypt.compareSync(password, storedPassword)) {
                 toast.success('Login successful!');
-                console.log('Login successful!');
+                navigate("/")
             } else {
                 toast.error('Invalid email or password.');
             }

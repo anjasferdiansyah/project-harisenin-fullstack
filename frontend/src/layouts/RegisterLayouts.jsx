@@ -3,8 +3,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bcrypt from "bcryptjs";
 import Navbar from "../components/organisems/Navbar";
+import { useNavigate } from "react-router-dom";
+
 
 function RegisterLayouts() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,6 +41,7 @@ function RegisterLayouts() {
     );
 
     toast.success("Registration successful!");
+    navigate("/")
   };
 
   return (
