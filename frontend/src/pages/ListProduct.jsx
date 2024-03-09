@@ -56,7 +56,7 @@ const ListProducts = () => {
               id={item.id}
               listImage={item.listImage}
               title={item.title}
-              price={item.price}
+              price={`Rp${item.price.toLocaleString("id-ID")}`}
             />
           ))}
         </div>
