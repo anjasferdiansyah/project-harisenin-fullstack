@@ -1,9 +1,7 @@
-import RegsiterLayouts from "../layouts/RegisterLayouts";
+import RegisterLayouts from "../layouts/RegisterLayouts";
 
 function Register() {
-    return (
-        <RegsiterLayouts />
-    );
+  return <RegisterLayouts />;
 }
 
 export default Register;
