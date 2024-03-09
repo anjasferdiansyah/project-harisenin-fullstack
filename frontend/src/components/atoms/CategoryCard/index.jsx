@@ -1,7 +1,9 @@
-const CategoryCard = ({ catImage, catTitle }) => {
+import { Link } from "react-router-dom";
+
+const CategoryCard = ({ catImage, catTitle, id }) => {
   return (
-    <a
-      href=""
+    <Link
+      to={`/products/${id}`}
       className="w-full object-cover overflow-hidden group relative aspect-auto snap-center"
     >
       <img
@@ -14,7 +16,7 @@ const CategoryCard = ({ catImage, catTitle }) => {
           {catTitle}
         </h3>
       </div>
-    </a>
+    </Link>
   );
 };
 

@@ -61,7 +61,9 @@ const ListProductSlider = ({ listImage }) => {
         speed={200}
       >
         <SwiperSlide
-          className={`relative aspect-[3/2] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[url(${listImage[1]})] after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]`}
+          className={`relative aspect-[3/2] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full ${
+            listImage ? "after:bg-[url(" + listImage[0] + ")]" : ""
+          } after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]`}
         >
           <img src={listImage[0]} alt="" className="object-cover" />
         </SwiperSlide>

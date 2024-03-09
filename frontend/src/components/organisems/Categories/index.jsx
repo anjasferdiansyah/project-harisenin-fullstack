@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CategoryCard from "../../atoms/CategoryCard";
+import { useParams } from "react-router";
 
 function Categories() {
   const [data, setData] = useState([]);
@@ -7,9 +8,11 @@ function Categories() {
   const fetchData = async () => {
     const response = await fetch("/src/data/listCategory.json");
     const json = await response.json();
-    console.log(json.data);
+
     setData(json.data);
   };
+
+  console.log(data);
 
   useEffect(() => {
     fetchData();
@@ -23,9 +26,10 @@ function Categories() {
             className="scroller scroll-pl-12 grid grid-flow-col auto-cols-[100%] md:auto-cols-[32%] overflow-auto overscroll-x-contain gap-4 snap-x snap-mandatory hover:scroll-pl-4"
             id="slider-img"
           >
-            {data.map((item) => (
+            {data.map((item, i) => (
               <CategoryCard
-                key={item}
+                key={item.id}
+                id={item.id}
                 catImage={item.img}
                 catTitle={item.catTitle}
               />
