@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function TopBar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const texts = [
-    'Free shipping from €25',
+    `Free shipping from €25`,
     'Order now = delivered on Tuesday',
     'Easy payment afterwards',
     'Trusted shops of 9.2',
@@ -19,14 +19,14 @@ function TopBar() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  },[]);
+  });
   return (
     <>
       <div className="bg-[#213875] w-full h-[35px] px-0 pt-[5px] pb-[6px] text-white text-[16px] font-400 leading-[25.6px] text-center">
         <div className="max-w-[1880px] px-[20px] min-[992px]:px-[40px] min-[1310px]:px-[60px]">
           <div className="flex justify-center text-[14px] min-[992px]:text-[16px] leading-[24px] w-full tracking-[0.3px] whitespace-nowrap overflow-hidden text-ellipsis">
             <div className=" min-[768px]:justify-center max-[768px]:mx-[auto] flex ">
-              {windowWidth > 768 ? (
+              {windowWidth > 768 && (
                 <div className="flex gap-5">
                   <div className="relative">
                     <SvgIcon />
@@ -45,13 +45,12 @@ function TopBar() {
                     <BoxWraper>{texts[3]}</BoxWraper>
                   </div>
                 </div>
-              ) : (
-                windowWidth <= 768 && (
-                  <div className="relative">
-                    <SvgIcon />
-                    <TextRotator texts={texts} />
-                  </div>
-                )
+              )}
+              {windowWidth <= 768 && (
+                <div className="relative">
+                  <SvgIcon />
+                  <TextRotator texts={texts} />
+                </div>
               )}
             </div>
           </div>
