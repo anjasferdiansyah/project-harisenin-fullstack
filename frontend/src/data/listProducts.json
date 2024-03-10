@@ -9,8 +9,12 @@
         "/img/dress-wanita-2.webp",
         "/img/dress-wanita-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 1
+      "desc": "Dress ini terbuat dari bahan stretch yang indah dan tidak hanya terlihat bagus tetapi juga sangat nyaman. Bagian kaki jatuh sampai betis dan terdapat saku di bagian depan. Tali bahu lebar memberikan kenyamanan dan tombol di bagian depan menambah sentuhan ceria. Bahan berstruktur memberikan tampilan musim panas Anda kecanggihan yang halus. PRTANGELINA memiliki model regular fit.",
+      "catId": 1,
+      "rating": {
+        "rate": 4.1,
+        "count": 109
+      }
     },
     {
       "id": 2,
@@ -21,8 +25,12 @@
         "/img/hoodie-wanita-2.webp",
         "/img/hoodie-wanita-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 1
+      "desc": "Gaya luar biasa ini adalah yang Anda butuhkan. Itu membuat Anda tetap nyaman dan hangat dan Anda bisa memakainya sepanjang tahun. Hoodie santai ini terbuat dari bahan campuran katun yang lembut dan nyaman. Ujung bawah dan tepi lengan terbuat dari kain bergaris. PRTDAFNE dari Protest adalah hoodie yang sempurna untuk setiap hari.",
+      "catId": 1,
+      "rating": {
+        "rate": 4.2,
+        "count": 190
+      }
     },
     {
       "id": 3,
@@ -33,8 +41,12 @@
         "/img/outdoor-wanita-2.webp",
         "/img/outdoor-wanita-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 1
+      "desc": "seri PVRE Green kami dengan pakaian super teknis yang diproduksi secara berkelanjutan. Anorak ini bebas PFC untuk membatasi efek berbahaya bahan kimia ini terhadap kesehatan kita dan lingkungan.",
+      "catId": 1,
+      "rating": {
+        "rate": 4.0,
+        "count": 200
+      }
     },
     {
       "id": 4,
@@ -45,8 +57,12 @@
         "/img/tshirt-wanita-2.webp",
         "/img/tshirt-wanita-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 1
+      "desc": "Dibuat dari bahan katun berkualitas tinggi yang ringan dan bernapas, memberikan kenyamanan sepanjang hari. Sentuhan satin pada bagian kerah dan manset menambahkan sentuhan mewah yang halus.",
+      "catId": 1,
+      "rating": {
+        "rate": 4.5,
+        "count": 200
+      }
     },
     {
       "id": 5,
@@ -57,8 +73,12 @@
         "/img/kategori11.webp",
         "/img/kategori12.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 3
+      "desc": "Dibuat dari bahan katun berkualitas tinggi yang ringan dan bernapas, memberikan kenyamanan sepanjang hari. Sentuhan satin pada bagian kerah dan manset menambahkan sentuhan mewah yang halus.",
+      "catId": 3,
+      "rating": {
+        "rate": 4.0,
+        "count": 83
+      }
     },
     {
       "id": 6,
@@ -69,8 +89,12 @@
         "/img/kategori12.webp",
         "/img/kategori13.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 3
+      "desc": "Dibuat dari bahan katun berkualitas tinggi yang ringan dan bernapas, memberikan kenyamanan sepanjang hari. Sentuhan satin pada bagian kerah dan manset menambahkan sentuhan mewah yang halus.",
+      "catId": 3,
+      "rating": {
+        "rate": 4.0,
+        "count": 87
+      }
     },
     {
       "id": 7,
@@ -81,8 +105,12 @@
         "/img/outdoor-pria-2.webp",
         "/img/outdoor-pria-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 2
+      "desc": "Dibuat dari bahan katun berkualitas tinggi yang ringan dan bernapas, memberikan kenyamanan sepanjang hari. Sentuhan satin pada bagian kerah dan manset menambahkan sentuhan mewah yang halus.",
+      "catId": 2,
+      "rating": {
+        "rate": 4.1,
+        "count": 99
+      }
     },
     {
       "id": 8,
@@ -93,8 +121,12 @@
         "/img/shorts-pria-2.webp",
         "/img/shorts-pria-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 2
+      "desc": "Casual dengan sentuhan santai yang tetap stylish. Celana pendek dengan potongan modern yang cocok untuk berbagai aktivitas di musim panas.",
+      "catId": 2,
+      "rating": {
+        "rate": 3.9,
+        "count": 55
+      }
     },
     {
       "id": 9,
@@ -105,8 +137,12 @@
         "/img/celana-panjang-pria-2.webp",
         "/img/celana-panjang-pria-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 2
+      "desc": "Celana panjang dengan potongan slim fit yang memberikan siluet yang rapi dan terlihat modis. Cocok untuk berbagai kesempatan, mulai dari kegiatan sehari-hari hingga acara semi-formal.",
+      "catId": 2,
+      "rating": {
+        "rate": 4.3,
+        "count": 66
+      }
     },
     {
       "id": 10,
@@ -117,8 +153,12 @@
         "/img/kemeja-pria-2.webp",
         "/img/kemeja-pria-3.webp"
       ],
-      "desc": "Lorem ipsum dolor sit amet",
-      "catId": 2
+      "desc": "Kemeja dengan potongan slim fit yang memberikan kesan rapi dan modern. Cocok untuk berbagai kesempatan, mulai dari acara formal hingga santai.",
+      "catId": 2,
+      "rating": {
+        "rate": 4.2,
+        "count": 57
+      }
     }
   ]
 }

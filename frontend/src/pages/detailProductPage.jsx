@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 const DetailProductPage = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -128,11 +128,19 @@ const DetailProductPage = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="p-5 md:max-w-xl max-w-sm ">
-          <div className="text-xl font-bold">{data && data.title}</div>
-          <div className="text-xl font-bold">Rp{data && data.price.toLocaleString("id-ID")}</div>
-          <div className="flex gap-2">
-          <div className="h-12 flex m-2 border border-black w-max rounded-md">
+        <div className="p-5 md:max-w-xl max-w-sm">
+          <div className="text-4xl font-bold text-blue-900">
+            {data && data.title}
+          </div>
+          <div className="text-xl font-bold">
+            Rp{data && data.price.toLocaleString("id-ID")}
+          </div>
+          <div className="font-semibold">
+            Rating :{data && data.rating.rate}/5{" "}
+            {`(${data && data.rating.count})`}
+          </div>
+          <div className="flex gap-2 items-center">
+            <div className="h-10 flex my-2 border border-black w-max rounded-md">
               <i
                 onClick={decrementQty}
                 id="decrement"
@@ -151,9 +159,14 @@ const DetailProductPage = () => {
                 className="fa-solid fa-plus mx-4 border-gray-100 flex items-center justify-center cursor-pointer"
               ></i>
             </div>
-            <button onClick={() => onClickAddToCart(data && data)} classname="bg-black text-white px-3 py-1 w-full rounded">
-              Add to cart
-            </button>
+            <div>
+              <button
+                onClick={() => onClickAddToCart(data && data)}
+                className=" bg-blue-900 text-white w-full p-2 rounded font-semibold hover:bg-white hover:text-blue-800 border hover:scale-105"
+              >
+                Add to cart
+              </button>
+            </div>
           </div>
           <div className="text-sm ">Detail</div>
           <div className="text-sm ">{data && data.desc}</div>
