@@ -1,10 +1,21 @@
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const Checkout = () => {
+  const handleCheckout = () => {
+    toast.success("Payment Successfull 😍!");
+    setTimeout(() => {
+      window.location.href = '/'
+
+    }, 3000);
+  };
   return (
     <div>
         <Navbar/>
+        <ToastContainer />
       <div className="bg-gray-100 text-[#213775] px-4 md:px-10 lg:px-20 xl:px-20 py-10 md:py-20 xl:py-14 rounded-md shadow-md mb-4 mt-10 md:mt-20 md:mx-28 lg:mt-40">
         <h2 className="pb-2 mb-4 text-2xl md:text-xl lg:text-xl xl:text-2xl font-bold">
           1. Billing information
@@ -97,6 +108,7 @@ const Checkout = () => {
           SEND TO DIFFERENT ADDRESS ?
         </div>
         <button
+          onClick={handleCheckout}
           type="submit"
           className="border text-white text-xs uppercase font-extrabold tracking-[0.18em] bg-[#213775] w-full md:w-52 p-3 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0 ">
           Proceed to payment

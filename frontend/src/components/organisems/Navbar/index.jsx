@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TopBar from "../../molecules/TopBar";
+import { Cart } from "../Cart";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [viewCart, setViewCart] = useState(false)
+
+  const toggleCart = () => {
+      setViewCart(!viewCart)
+      }
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -89,8 +95,10 @@ function Navbar() {
             </a>
           </nav>
         </div>
-        <div className="grow-[3] grid place-items-center p-[10px]">
-          <a href="./index.html"> LogoWeb </a>
+        <div className="grow-[3] grid place-items-center p-[5px]">
+          <Link to={'/'}> 
+            <img src="/img/LOGO.png" alt="" width={40}/>
+           </Link>
         </div>
         <div className="flex grow shrink basis-0 h-[59px]">
           <div className="hidden min-[940px]:contents">
@@ -151,7 +159,7 @@ function Navbar() {
               </svg>
             </button>
           </div>
-          <button className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer">
+          <button onClick={toggleCart} className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer">
             <span className="w-[12rem] text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
               shopping cart
             </span>
@@ -170,6 +178,7 @@ function Navbar() {
               </svg>
             </span>
           </button>
+          <Cart show={viewCart} />
         </div>
       </header>
     </>

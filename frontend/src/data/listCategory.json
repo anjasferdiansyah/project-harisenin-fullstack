@@ -3,7 +3,17 @@
     {
       "id": 1,
       "catTitle": "Pakaian Wanita",
-      "img": "/kategori3.webp"
+      "img": "/img/kategori4.webp"
+    },
+    {
+      "id": 2,
+      "catTitle": "Pakaian Pria",
+      "img": "/img/kategori2.webp"
+    },
+    {
+      "id": 3,
+      "catTitle": "Pakaian Anak",
+      "img": "/img/kategori3.webp"
     }
   ]
 }

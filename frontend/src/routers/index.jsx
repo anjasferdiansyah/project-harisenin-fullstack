@@ -9,14 +9,14 @@ import DetailProductPage from "../pages/detailProductPage";
 export const router = createBrowserRouter([
   {
     path: "/checkout",
-    element: <Checkout/>,
+    element: <Checkout />,
   },
   {
     path: "/",
     element: <Homepage />,
   },
   {
-    path: "products/:category",
+    path: "products/:catId",
     element: <ListProducts />,
   },
   {

@@ -2,25 +2,123 @@
   "data": [
     {
       "id": 1,
-      "title": "Jaket Hoodie",
+      "title": "Dress Wanita",
       "price": 20000,
       "listImage": [
-        "/img/kategori3.webp",
-        "/img/kategori4.webp",
-        "/img/kategori5.webp"
+        "/img/dress-wanita-1.webp",
+        "/img/dress-wanita-2.webp",
+        "/img/dress-wanita-3.webp"
       ],
-      "desc": "lorem ipsum dolor sit amet"
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 1
     },
     {
       "id": 2,
-      "title": "Jaket mahal",
+      "title": "Jaket Hoodie",
       "price": 30000,
       "listImage": [
-        "/img/kategori3.webp",
-        "/img/kategori4.webp",
-        "/img/kategori5.webp"
+        "/img/hoodie-wanita-1.webp",
+        "/img/hoodie-wanita-2.webp",
+        "/img/hoodie-wanita-3.webp"
       ],
-      "desc": "lorem ipsum dolor sit ametsasasa"
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 1
+    },
+    {
+      "id": 3,
+      "title": "Jas Outdoor",
+      "price": 40000,
+      "listImage": [
+        "/img/outdoor-wanita-1.webp",
+        "/img/outdoor-wanita-2.webp",
+        "/img/outdoor-wanita-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 1
+    },
+    {
+      "id": 4,
+      "title": "T-Shirt Wanita",
+      "price": 25000,
+      "listImage": [
+        "/img/tshirt-wanita-1.webp",
+        "/img/tshirt-wanita-2.webp",
+        "/img/tshirt-wanita-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 1
+    },
+    {
+      "id": 5,
+      "title": "Setelan Anak",
+      "price": 30000,
+      "listImage": [
+        "/img/kategori10.webp",
+        "/img/kategori11.webp",
+        "/img/kategori12.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 3
+    },
+    {
+      "id": 6,
+      "title": "Gaun Anak Kecil",
+      "price": 35000,
+      "listImage": [
+        "/img/kategori11.webp",
+        "/img/kategori12.webp",
+        "/img/kategori13.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 3
+    },
+    {
+      "id": 7,
+      "title": "Outdoor Pria",
+      "price": 35000,
+      "listImage": [
+        "/img/outdoor-pria-1.webp",
+        "/img/outdoor-pria-2.webp",
+        "/img/outdoor-pria-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 2
+    },
+    {
+      "id": 8,
+      "title": "Shorts Pria",
+      "price": 28000,
+      "listImage": [
+        "/img/shorts-pria-1.webp",
+        "/img/shorts-pria-2.webp",
+        "/img/shorts-pria-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 2
+    },
+    {
+      "id": 9,
+      "title": "Celana Panjang Pria",
+      "price": 32000,
+      "listImage": [
+        "/img/celana-panjang-pria-1.webp",
+        "/img/celana-panjang-pria-2.webp",
+        "/img/celana-panjang-pria-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 2
+    },
+    {
+      "id": 10,
+      "title": "Kemeja Pria",
+      "price": 18000,
+      "listImage": [
+        "/img/kemeja-pria-1.webp",
+        "/img/kemeja-pria-2.webp",
+        "/img/kemeja-pria-3.webp"
+      ],
+      "desc": "Lorem ipsum dolor sit amet",
+      "catId": 2
     }
   ]
 }

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/reducer/cartSlice";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -7,7 +9,6 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import Button from "../components/molecules/Footer/Button";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { useParams } from "react-router-dom";
@@ -15,6 +16,8 @@ import { useParams } from "react-router-dom";
 const DetailProductPage = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+  const dispatch = useDispatch()
+  const [qty, setQty] = useState(1);
   const { id } = useParams();
   const [data, setData] = useState(null);
 
@@ -30,6 +33,26 @@ const DetailProductPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const onClickAddToCart = (product) => {
+    dispatch(addToCart({ ...product, quantity: qty }));
+  };
+
+  const incrementQty = () => {
+    setQty(qty + 1);
+  };
+
+  const decrementQty = () => {
+    if (qty == 1) {
+      setQty(1);
+    } else {
+      setQty(qty - 1);
+    }
+  };
+
+  const onChangeQty = (e) => {
+    setQty(e.target.value);
+  };
 
   return (
     <div>
@@ -107,14 +130,30 @@ const DetailProductPage = () => {
         </div>
         <div className="p-5 md:max-w-xl max-w-sm ">
           <div className="text-xl font-bold">{data && data.title}</div>
-          <div className="text-xl font-bold">{data && data.price}</div>
+          <div className="text-xl font-bold">Rp{data && data.price.toLocaleString("id-ID")}</div>
           <div className="flex gap-2">
-            <Button classname="bg-black text-white px-3 py-1 w-full rounded">
+          <div className="h-12 flex m-2 border border-black w-max rounded-md">
+              <i
+                onClick={decrementQty}
+                id="decrement"
+                className="fa-solid fa-minus mx-4 border-gray-700 flex items-center justify-center cursor-pointer"
+              ></i>
+              <input
+                type="text"
+                className="w-14 text-center"
+                id="inputQty"
+                value={qty}
+                onChange={onChangeQty}
+              />
+              <i
+                onClick={incrementQty}
+                id="increment"
+                className="fa-solid fa-plus mx-4 border-gray-100 flex items-center justify-center cursor-pointer"
+              ></i>
+            </div>
+            <button onClick={() => onClickAddToCart(data && data)} classname="bg-black text-white px-3 py-1 w-full rounded">
               Add to cart
-            </Button>
-            <Button classname="bg-black text-white px-3 py-1 w-full rounded">
-              Add to cart
-            </Button>
+            </button>
           </div>
           <div className="text-sm ">Detail</div>
           <div className="text-sm ">{data && data.desc}</div>
