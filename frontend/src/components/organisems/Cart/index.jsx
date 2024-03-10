@@ -53,7 +53,7 @@ export const Cart = ({ show }) => {
   return (
     <>
     <div
-        className={`absolute fixe flex flex-col bg-white w-[470px] border border-t-1 right-0 top-[60px] h-[850px] transition-transform   ${show ? '' : 'translate-x-full'} `}
+        className={`absolute fixe flex flex-col bg-white w-full h-[90vh] md:w-[470px] md:h-[850px] border border-t-1 right-0 top-[60px]  transition-transform   ${show ? '' : 'translate-x-full'} `}
       >
         <ul className="p-11 bg-white overflow-y-auto  scrollbar-thin scrollbar-thumb-[#4a5568] scrollbar-track-[#cbd5e0]">
           {cartItems.map((item, index) => (
@@ -119,7 +119,7 @@ export const Cart = ({ show }) => {
                 <button className="border row-span-3 text-[#213775] text-xs font-bold uppercase tracking-[0.18em] bg-white h-16 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-white hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#213775] before:to-[#213775] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0  ">
                     ADD <br/> TO
                 </button>
-                <i onClick={onClickShowDiscount} className="absolute text-xl bottom-[240px] right-8 fa-regular fa-circle-xmark cursor-pointer"></i>
+                <i onClick={onClickShowDiscount} className="absolute text-xl bottom-[260px] right-8 fa-regular fa-circle-xmark cursor-pointer"></i>
               </div>
             </div>
             <div className="flex my-5 text-xl mt-2 font-bold m-0">
