@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 // eslint-disable-next-line react/prop-types
 const PopularCategoryCard = ({ image, catTitle }) => {
   return (
-    <a href="" className="w-full overflow-hidden group relative snap-center">
+    <Link to={`/category`} className="w-full overflow-hidden group relative snap-center">
       <img
         src={image}
         className="relative w-full h-full object-cover group-hover:scale-110 transition-all duration-300 group-hover:transition-all group-hover:duration-300"
@@ -12,7 +14,7 @@ const PopularCategoryCard = ({ image, catTitle }) => {
           {catTitle}
         </h3>
       </div>
-    </a>
+    </Link>
   );
 };
 

@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import TopBar from '../../molecules/TopBar';
 import { useEffect, useState } from 'react';
@@ -37,11 +38,36 @@ function Navbar() {
 
   const handleDivClick = () => {
     setIsShowClick(!isShowClick);
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import TopBar from "../../molecules/TopBar";
+
+function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData && userData.firstName) {
+      setIsLoggedIn(true);
+      setUserName(userData.firstName);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    setIsLoggedIn(false);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
     <>
       <TopBar />
+
       <header className="flex flex-nowrap justify-between z-10 bg-[#ffffff] w-full h-[61px] sticky top-0 border-y border-[#dee1ea] overflow-hidden">
         <div>
           {windowWidth <= 940 && isShowClick ? (
@@ -82,10 +108,75 @@ function Navbar() {
         </div>
         <div className="grow-[3] grid place-items-center p-[10px]">
           <Link to="/"> LogoWeb </Link>
+      <header className="flex flex-nowrap justify-between z-10 bg-[#ffffff] w-full h-[61px] sticky top-0 border-y border-[#dee1ea]">
+        <div className="flex">
+          <button className="grid place-items-center m-0 py-[23px] px-[32px] border-r border-[#dee1ea] cursor-pointer overflow-visible">
+            <span className="bg-[#213875] w-[19px] h-[2px] mb-[3px] relative"></span>
+            <span className="bg-[#213875] w-[19px] h-[2px] mb-[3px] relative"></span>
+            <span className="text-center text-[8px] text-500 leading-[8px]">
+              MENU
+            </span>
+          </button>
+        </div>
+        <div className="hidden min-[940px]:contents">
+          <nav className="flex">
+            <a
+              className="grid place-items-center relative text-[12px] font-[700] text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                LADIES
+              </span>
+            </a>
+            <a
+              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                GENTLEMEN
+              </span>
+            </a>
+            <a
+              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                GIRLS
+              </span>
+            </a>
+            <a
+              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                BOYS
+              </span>
+            </a>
+            <a
+              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                TODDLERS
+              </span>
+            </a>
+            <a
+              className="grid place-items-center relative text-[12px] font-bold text-[#ca3333] hover:text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
+              href="#"
+            >
+              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
+                SALE
+              </span>
+            </a>
+          </nav>
+        </div>
+        <div className="grow-[3] grid place-items-center p-[10px]">
+          <a href="./index.html"> LogoWeb </a>
         </div>
         <div className="flex grow shrink basis-0 h-[59px]">
           <div className="hidden min-[940px]:contents">
             <div className="flex text-center h-full">
+
               <Link
                 className="relative border-l border-[#dee1ea] font-400 text-[16px] no-underline after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-[#213875] after:scale-y-0 hover:after:scale-y-[100%] after:origin-top hover:after:origin-bottom after:transition-transform after:duration-[700ms] after:ease-[cubic-bezier(0.19,1,0.22,1)] after:delay-0"
                 to="/login"
@@ -127,6 +218,43 @@ function Navbar() {
                     </label>
                   )}
                 </label>
+              <div className="relative border-l border-[#dee1ea] font-400 text-[16px] no-underline">
+                {isLoggedIn ? (
+                  <div
+                    className="relative grid place-items-center w-[100px] h-full py-0 px-[15px] text-[#213875]"
+                    onClick={toggleDropdown}
+                  >
+                    <span className="text-center w-full overflow-hidden text-ellipsis leading-[22px]">
+                      {userName}
+                    </span>
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="relative grid place-items-center w-[100px] h-full py-0 px-[15px] text-[#213875]"
+                  >
+                    <span className="text-center w-full overflow-hidden text-ellipsis leading-[22px]">
+                      Login
+                    </span>
+                  </Link>
+                )}
+                {dropdownOpen && isLoggedIn && (
+                  <div
+                    className="absolute top-[59px] left-0 w-[100px] bg-[#ffffff] border border-[#dee1ea] shadow-md"
+                    onMouseLeave={() => setDropdownOpen(false)}
+                  >
+                    <button
+                      className="w-full py-[10px] px-[15px] text-[#213875] text-left hover:bg-[#dee1ea]"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center h-full border-l mb-[1em] py-0 px-[24px] cursor-pointer text-[#213875]">
+                Search
               </div>
             </div>
           </div>
@@ -135,6 +263,7 @@ function Navbar() {
               onClick={handleDivClick}
               className="flex flex-nowrap items-center justify-center h-[59px] text-[#213875] cursor-pointer max-[1310px]:py-[19px] max-[1310px]:px-[20px] border-l border-[#dee1ea]"
             >
+            <button className="flex flex-nowrap items-center justify-center h-[59px] text-[#213875] cursor-pointer max-[1310px]:py-[19px] max-[1310px]:px-[20px] border-l border-[#dee1ea]">
               <svg
                 width="1rem"
                 height="1rem"
@@ -168,6 +297,11 @@ function Navbar() {
                 windowWidth <= 940 || isSearchClick ? 'contents ' : 'hidden'
               }
             >
+          <button className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer">
+            <span className="w-[12rem] text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
+              shopping cart
+            </span>
+            <span className="min-[992px]:hidden overflow-hidden px-[20px] py-[19px]">
               <svg
                 viewBox="0 0 35.8 40"
                 className=""
@@ -184,6 +318,7 @@ function Navbar() {
           </button>
         </div>
       </header>
+
 
       {/* onClick menu ditampilan mobile */}
       <div
@@ -274,6 +409,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
 const ListMenuOnHover = ({ children }) => (
   <span className="text-2xl font-semibold  tracking-tighter leading-7 h-auto  size-0 w-fit hover:bg-[#213875]/30 cursor-pointer transition-colors ease-in-out  ">

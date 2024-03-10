@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import PopularCategoryCard from "../../molecules/PopularCategoryCard";
+import { Link } from "react-router-dom";
 
 const listImage = [
   {
@@ -74,9 +75,9 @@ const PopularCategory = () => {
   return (
     <section className="py-12">
       <div className="my-8 px-4 md:px-8 lg:px-10 flex justify-between">
-        <h1 className="text-xl md:text-2xl font-semibold text-blue-950 px-4">
+        <Link to={`/category`} className="text-xl md:text-2xl font-semibold text-blue-950 px-4">
           Kategori Populer
-        </h1>
+        </Link>
         <div className="hidden md:flex md:gap-2">
           <button
             className={`${
