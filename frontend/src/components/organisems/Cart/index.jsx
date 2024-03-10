@@ -22,14 +22,6 @@ export const Cart = ({ show }) => {
     dispatch(removeFromCart(index));
   };
 
-  const onClickCheckOut = (e) => {
-    if (price === 0) {
-      alert("Please order something");
-    } else {
-      alert("Your transaction is succesfully");
-    }
-  };
-
   const onClickShowDiscount = () => {
     setShowDiscount(!showDiscount);
   };
@@ -52,7 +44,9 @@ export const Cart = ({ show }) => {
 
   return (
     <div
-      className={`absolute w-full md:w-[470px] md:h-[850px] top-[60px] right-[0] overflow-hidden`}
+      className={`absolute w-full md:w-[470px] md:h-[850px] top-[60px] right-[0] overflow-hidden ${
+        show ? "" : "hidden"
+      }`}
     >
       <div
         className={`flex-col bg-white w-full h-[90vh] md:w-[470px] md:h-[850px] border border-t-1 right-0 top-[60px]  transition-transform   ${
