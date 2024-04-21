@@ -14,5 +14,5 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/', router);
 
 app.listen(process.env.SERVER_PORT, () => {
-  console.log('Server Running');
+  console.log('Server Running on port', process.env.SERVER_PORT);
 });
