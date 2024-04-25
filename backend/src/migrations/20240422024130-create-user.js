@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       phoneNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(15),
         allowNull: false,
         unique: true,
       },
