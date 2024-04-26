@@ -19,7 +19,7 @@
     "prettier": "latest"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.1.1",
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",

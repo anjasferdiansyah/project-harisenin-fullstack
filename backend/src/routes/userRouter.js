@@ -4,13 +4,16 @@ const {
   register,
   updateUser,
   deleteUser,
+  login,
 } = require('../controllers/userController');
+const { verify } = require('../middlewares/verifyToken');
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
+router.get('/', verify, getAllUsers);
 router.post('/register', register);
 router.patch('/:id', updateUser);
 router.delete('/:id', deleteUser);
+router.post('/login', login);
 
 module.exports = router;
