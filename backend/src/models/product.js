@@ -19,8 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     listImage: DataTypes.STRING,
     desc: DataTypes.TEXT,
     catId: DataTypes.INTEGER,
-    rating_rate: DataTypes.DECIMAL,
-    rating_count: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',
