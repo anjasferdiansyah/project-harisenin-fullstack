@@ -19,8 +19,9 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use('/api/user', user);
 app.use('/api/cart', cart);
-app.use('/api/product', product);
 app.use('/api/userDetail', userDetail);
+app.use('/api/product', product);
+
 
 // cek koneksi ke mysql
 sequelize
