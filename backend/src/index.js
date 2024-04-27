@@ -8,7 +8,6 @@ const { sequelize } = require('./models');
 
 const user = require('./routes/userRouter');
 const cart = require('./routes/cartRouter');
-const product = require('./routes/productRoute');
 const userDetail = require('./routes/userDetailRouter');
 const product = require('./routes/productRouter');
 const category = require('./routes/categoryRouter');
@@ -23,11 +22,7 @@ app.use('/api/user', user);
 app.use('/api/cart', cart);
 app.use('/api/userDetail', userDetail);
 app.use('/api/product', product);
-<<<<<<< HEAD
 app.use('/api/category', category);
-=======
-
->>>>>>> a3f1f7a787d8929545cc83aece5e53dd9ce8b9a9
 
 // cek koneksi ke mysql
 sequelize
