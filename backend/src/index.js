@@ -9,6 +9,8 @@ const { sequelize } = require('./models');
 const user = require('./routes/userRouter');
 const cart = require('./routes/cartRouter');
 const userDetail = require('./routes/userDetailRouter');
+const product = require('./routes/productRouter');
+const category = require('./routes/categoryRouter');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -19,6 +21,8 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/api/user', user);
 app.use('/api/cart', cart);
 app.use('/api/userDetail', userDetail);
+app.use('/api/product', product);
+app.use('/api/category', category);
 
 // cek koneksi ke mysql
 sequelize
