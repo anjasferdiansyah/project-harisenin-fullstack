@@ -17,6 +17,7 @@ const verify = async (req, res, next) => {
         message: 'Failed to authenticate jwt',
       });
     }
+    req.user = checkToken;
 
     next();
   } catch (error) {
