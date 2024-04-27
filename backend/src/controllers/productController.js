@@ -10,20 +10,20 @@ exports.getAllProcuts = async (req, res) => {
     }
 }
 
-// exports.getProductById = async (req, res) => {
-//     const id = req.params.id;
-//     try {
-//         const product = await Product.findByPk(id)
-//         res.json(product)
-//         if(!product) {
-//             return res.status(404).json({ message: 'Product not found'})
-//         }
-//         res.json(product)
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json( { message: 'Internal Server Error' })
-//     }
-// }
+exports.getProductById = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const product = await Product.findByPk(id)
+        res.json(product)
+        if(!product) {
+            return res.status(404).json({ message: 'Product not found'})
+        }
+        res.json(product)
+    } catch (err) {
+        console.error(err);
+        res.status(500).json( { message: 'Internal Server Error' })
+    }
+}
 
 exports.createProduct = async (req, res) => {
     const { title, price, listImage, desc, catId, rating_rate, rating_count } = req.body
