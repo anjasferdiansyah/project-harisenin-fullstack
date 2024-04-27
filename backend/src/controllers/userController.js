@@ -1,6 +1,7 @@
 const { user } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -84,10 +85,20 @@ const login = async (req, res) => {
 };
 // end of user controllers
 
+const searchUser = async (req, res) => {
+  const result = await user.findAll({
+    where: {
+      [Op.or]: [{ username: { [Op.like]: `%${req.query.q}%` } }],
+    },
+  });
+  res.send(result);
+};
+
 module.exports = {
   getAllUsers,
   register,
   updateUser,
   deleteUser,
   login,
+  searchUser,
 };
