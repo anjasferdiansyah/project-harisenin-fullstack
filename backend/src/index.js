@@ -5,9 +5,11 @@ const bcrypt = require('bcrypt');
 
 const router = require('./routes/router');
 const { sequelize } = require('./models');
+
 const user = require('./routes/userRouter');
 const cart = require('./routes/cartRouter');
 const product = require('./routes/productRoute');
+const userDetail = require('./routes/userDetailRouter');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -18,6 +20,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/api/user', user);
 app.use('/api/cart', cart);
 app.use('/api/product', product);
+app.use('/api/userDetail', userDetail);
 
 // cek koneksi ke mysql
 sequelize
