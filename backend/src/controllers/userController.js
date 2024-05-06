@@ -1,4 +1,5 @@
 const { user } = require('../models');
+const { userDetail } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
@@ -44,44 +45,74 @@ const deleteUser = async (req, res) => {
 const register = async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
-  const result = await user.create({
-    phoneNumber: req.body.phoneNumber,
-    username: req.body.username,
-    email: req.body.email,
-    password: hashedPassword,
-  });
-  res.send(result);
+  try {
+    const newUser = user.create(
+      {
+        phoneNumber: req.body.phoneNumber,
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword,
+        userDetail: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          address: req.body.address,
+          gender: req.body.gender,
+        },
+      },
+      {
+        include: [userDetail],
+      }
+    );
+
+    res
+      .status(201)
+      .json({ message: 'User created successfully', data: newUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 // login user controller
 const login = async (req, res) => {
-  const getUser = await user.findOne({
-    where: {
-      email: req.body.email,
-    },
-  });
-  if (!getUser) {
-    res.status(404).json({ message: 'User not found' });
-  }
+  try {
+    const getUser = await user.findOne({
+      where: {
+        email: req.body.email,
+      },
+      include: [userDetail],
+    });
 
-  const comparedPassword = bcrypt.compareSync(
-    req.body.password,
-    getUser.password
-  );
-
-  if (!comparedPassword) {
-    res.status(401).json({ message: 'Wrong password' });
-  }
-
-  const token = jwt.sign(
-    { id: getUser.id, email: getUser.email, username: getUser.username },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: '1d',
+    console.log(getUser);
+    if (!getUser) {
+      res.status(404).json({ message: 'User not found' });
     }
-  );
 
-  return res.status(200).send({ message: 'Login successful', token: token });
+    const comparedPassword = bcrypt.compareSync(
+      req.body.password,
+      getUser.password
+    );
+
+    if (!comparedPassword) {
+      res.status(401).json({ message: 'Wrong password' });
+    }
+
+    const token = jwt.sign(
+      {
+        id: getUser.id,
+        email: getUser.email,
+        username: getUser.username,
+        firstName: getUser.userDetail.firstName,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '1d',
+      }
+    );
+
+    return res.status(200).send({ message: 'Login successful', token: token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 // end of user controllers
 

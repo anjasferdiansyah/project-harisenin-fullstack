@@ -7,22 +7,46 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [viewCart, setViewCart] = useState(false)
+  const [viewCart, setViewCart] = useState(false);
+
+  const getToken = sessionStorage.getItem("token");
+
+  let userData;
+  if (getToken) {
+    const decodeToken = (token) => {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      return JSON.parse(jsonPayload);
+    };
+
+    userData = decodeToken(getToken);
+
+    console.log(userData);
+  }
 
   const toggleCart = () => {
-      setViewCart(!viewCart)
-      }
+    setViewCart(!viewCart);
+  };
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData && userData.firstName) {
+    if (getToken) {
       setIsLoggedIn(true);
-      setUserName(userData.firstName);
+      setUserName(userData.username);
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userData");
+    sessionStorage.removeItem("token");
     setIsLoggedIn(false);
   };
 
@@ -96,9 +120,9 @@ function Navbar() {
           </nav>
         </div>
         <div className="grow-[3] grid place-items-center p-[5px]">
-          <Link to={'/'}> 
-            <img src="/img/LOGO.png" alt="" width={40}/>
-           </Link>
+          <Link to={"/"}>
+            <img src="/img/LOGO.png" alt="" width={40} />
+          </Link>
         </div>
         <div className="flex grow shrink basis-0 h-[59px]">
           <div className="hidden min-[940px]:contents">
@@ -159,7 +183,10 @@ function Navbar() {
               </svg>
             </button>
           </div>
-          <button onClick={toggleCart} className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer">
+          <button
+            onClick={toggleCart}
+            className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer"
+          >
             <span className="w-[12rem] text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
               shopping cart
             </span>

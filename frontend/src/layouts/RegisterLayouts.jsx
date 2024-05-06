@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import bcrypt from "bcryptjs";
 import Navbar from "../components/organisems/Navbar";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 function RegisterLayouts() {
   const navigate = useNavigate();
@@ -12,7 +11,9 @@ function RegisterLayouts() {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    username: "",
+    phoneNumber: "",
+    address: "",
     password: "",
     confirmPassword: "",
   });
@@ -25,23 +26,33 @@ function RegisterLayouts() {
     }));
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const { password, confirmPassword, ...otherData } = formData;
+    console.log(formData);
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
       return;
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({ ...otherData, password: hashedPassword })
+    const response = await axios.post(
+      "http://localhost:8081/api/user/register/",
+      {
+        ...otherData,
+        password: password,
+      }
     );
 
+    console.log(response);
+
+    if (response.status !== 201) {
+      toast.error("Registration failed.");
+      return;
+    }
+
     toast.success("Registration successful!");
-    navigate("/")
+    navigate("/login");
   };
 
   return (
@@ -55,7 +66,7 @@ function RegisterLayouts() {
             <p className="text-sm">Welcome to your account</p>
           </div>
 
-          <div className="md:w-3/4 p-8 md:p-20 bg-green-100 items-center justify-center h-max md:h-screen">
+          <div className="md:w-3/4 p-8 md:p-20 bg-green-100 items-center justify-center  qmd:h-screen">
             <form
               onSubmit={handleRegister}
               method="post"
@@ -96,6 +107,24 @@ function RegisterLayouts() {
               </div>
 
               <div className="mb-4">
+                <label htmlFor="l-name" className="block text-xs font-medium">
+                  GENDER
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleInputChange}
+                  className="mt-1 p-2 w-full border border-blue-900"
+                  required
+                >
+                  <option value="">Select</option>
+                  <option value="pria">Pria</option>
+                  <option value="wanita">Wanita</option>
+                </select>
+              </div>
+
+              <div className="mb-4">
                 <label htmlFor="e-mail" className="block text-xs font-medium">
                   E-MAIL ADDRESS
                 </label>
@@ -111,14 +140,43 @@ function RegisterLayouts() {
               </div>
 
               <div className="mb-4">
+                <label htmlFor="e-mail" className="block text-xs font-medium">
+                  USERNAME
+                </label>
+                <input
+                  type="text"
+                  id="u-name"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  className="mt-1 p-2 w-full border border-blue-900"
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
                 <label htmlFor="phone" className="block text-xs font-medium">
                   PHONE
                 </label>
                 <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  className="mt-1 p-2 w-full border border-blue-900"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="phone" className="block text-xs font-medium">
+                  ADDRESS
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  value={formData.address}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-blue-900"
                 />
