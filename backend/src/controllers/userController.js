@@ -1,4 +1,4 @@
-const { user } = require('../models');
+const { user, sequelize } = require('../models');
 const { userDetail } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -45,29 +45,42 @@ const deleteUser = async (req, res) => {
 const register = async (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
+  let transaction;
   try {
-    const newUser = user.create(
+    // Mulai transaksi
+    transaction = await sequelize.transaction();
+
+    // Buat user baru dan userDetail dalam transaksi
+    const newUser = await user.create(
       {
         phoneNumber: req.body.phoneNumber,
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        userDetail: {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          address: req.body.address,
-          gender: req.body.gender,
-        },
       },
-      {
-        include: [userDetail],
-      }
+      { transaction }
     );
+
+    const newUserDetail = await userDetail.create(
+      {
+        user_id: newUser.id,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        address: req.body.address,
+        gender: req.body.gender,
+      },
+      { transaction }
+    );
+
+    // Commit transaksi jika berhasil
+    await transaction.commit();
 
     res
       .status(201)
       .json({ message: 'User created successfully', data: newUser });
   } catch (error) {
+    // Rollback transaksi jika terjadi kesalahan
+    if (transaction) await transaction.rollback();
     res.status(500).json({ message: error.message });
   }
 };
@@ -98,8 +111,6 @@ const login = async (req, res) => {
 
     const token = jwt.sign(
       {
-        id: getUser.id,
-        email: getUser.email,
         username: getUser.username,
         firstName: getUser.userDetail.firstName,
       },
