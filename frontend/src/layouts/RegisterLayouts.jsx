@@ -2,8 +2,8 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../components/organisems/Navbar";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RegisterLayouts() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ function RegisterLayouts() {
     }
 
     const response = await axios.post(
-      "http://localhost:8081/api/user/register/",
+      `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
       {
         ...otherData,
         password: password,
@@ -52,7 +52,9 @@ function RegisterLayouts() {
     }
 
     toast.success("Registration successful!");
-    navigate("/login");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   return (

@@ -28,8 +28,6 @@ function Navbar() {
     };
 
     userData = decodeToken(getToken);
-
-    console.log(userData);
   }
 
   const toggleCart = () => {
