@@ -77,3 +77,14 @@ exports.updateProduct = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
+exports.getProductsByCatId = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await products.findAll({ where: { catId: id } });
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
