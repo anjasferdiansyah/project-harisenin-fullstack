@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import CategoryCard from "../../atoms/CategoryCard";
 import { useParams } from "react-router";
+import axios from "axios";
 
 function Categories() {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch("/src/data/listCategory.json");
-    const json = await response.json();
+    
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/category/`);
 
-    setData(json.data);
+    setData(response.data);
   };
 
   console.log(data);
@@ -30,8 +31,8 @@ function Categories() {
               <CategoryCard
                 key={item.id}
                 id={item.id}
-                catImage={item.img}
-                catTitle={item.catTitle}
+                catImage={item.image}
+                catTitle={item.title}
               />
             ))}
           </div>

@@ -4,31 +4,25 @@ import ListCategoryCard from "../components/atoms/ListProductCard";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { useParams } from "react-router";
+import axios from "axios";
 
 const ListProducts = () => {
   const { catId } = useParams();
-  console.log(catId);
 
   const [data, setData] = useState([]);
   const [catTitle, setCatTitle] = useState([]);
 
   const fetchDataCategory = async () => {
-    const response = await fetch("/src/data/listCategory.json");
-    const json = await response.json();
-    const findData = json.data.find((item) => item.id == catId);
-    setCatTitle(findData.catTitle);
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/category/${catId}`);
+
+    setCatTitle(response.data.title);
   };
 
   const fetchData = async () => {
-    const response = await fetch("/src/data/listProducts.json");
-    const json = await response.json();
-    console.log(json.data);
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/category/${catId}`);
 
-    const filterData = json.data.filter((item) => item.catId == catId);
-    setData(filterData);
+    setData(response.data)
   };
-
-  console.log(data);
 
   useEffect(() => {
     fetchData();
@@ -50,7 +44,7 @@ const ListProducts = () => {
           </p>
         </div>
         <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 p-4 md:px-10">
-          {data.map((item, i) => (
+          {data && data.map((item, i) => (
             <ListProductCard
               key={i}
               id={item.id}

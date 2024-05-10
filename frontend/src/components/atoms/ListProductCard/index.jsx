@@ -3,11 +3,12 @@ import ListProductSlider from "../ListProductSlider";
 
 const ListProductCard = ({ listImage, title, price, id }) => {
   console.log(listImage);
-
+  const imgs = listImage.split(', ')
+  
   return (
     <div className="">
       <div className="group relative overflow-hidden">
-        <ListProductSlider listImage={listImage} />
+        <ListProductSlider listImage={imgs} />
       </div>
       <div className="text-[#213875]">
         <Link

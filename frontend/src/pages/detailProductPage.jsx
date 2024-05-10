@@ -12,6 +12,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const DetailProductPage = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -22,11 +23,11 @@ const DetailProductPage = () => {
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
-    const response = await fetch("/src/data/listProducts.json");
-    const json = await response.json();
-
-    const findData = json.data.find((item) => item.id == parseInt(id));
-    setData(findData);
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${id}`);
+    if (!response.data) {
+      return;
+    }
+    setData(response.data);
   };
   console.log(data);
 
@@ -134,10 +135,6 @@ const DetailProductPage = () => {
           </div>
           <div className="text-xl font-bold">
             Rp{data && data.price.toLocaleString("id-ID")}
-          </div>
-          <div className="font-semibold">
-            Rating :{data && data.rating.rate}/5{" "}
-            {`(${data && data.rating.count})`}
           </div>
           <div className="flex gap-2 items-center">
             <div className="h-10 flex my-2 border border-black w-max rounded-md">
