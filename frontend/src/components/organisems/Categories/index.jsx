@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import CategoryCard from "../../atoms/CategoryCard";
-import { useParams } from "react-router";
 import axios from "axios";
 
 function Categories() {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
-    
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/category/`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/category/`
+    );
 
     setData(response.data);
   };
@@ -27,7 +27,7 @@ function Categories() {
             className="scroller scroll-pl-12 grid grid-flow-col auto-cols-[100%] md:auto-cols-[32%] overflow-auto overscroll-x-contain gap-4 snap-x snap-mandatory hover:scroll-pl-4"
             id="slider-img"
           >
-            {data.map((item, i) => (
+            {data.map((item) => (
               <CategoryCard
                 key={item.id}
                 id={item.id}
