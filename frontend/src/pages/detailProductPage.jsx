@@ -23,12 +23,18 @@ const DetailProductPage = () => {
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${id}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/product/${id}`
+    );
     if (!response.data) {
       return;
     }
-    setData(response.data);
+
+    const { listImage } = response.data;
+    const imgArray = response.data && listImage.split(", ");
+    setData({ ...response.data, listImage: imgArray });
   };
+
   console.log(data);
 
   useEffect(() => {
