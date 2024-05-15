@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TopBar from "../../molecules/TopBar";
 import { Cart } from "../Cart";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [viewCart, setViewCart] = useState(false);
+  const [clickedSearch, setClickedSearch] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const getToken = sessionStorage.getItem("token");
 
@@ -48,6 +51,12 @@ function Navbar() {
     setIsLoggedIn(false);
   };
 
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/search", { state: { searchInput: searchInput } });
+  };
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -67,56 +76,63 @@ function Navbar() {
         </div>
         <div className="hidden min-[940px]:contents">
           <nav className="flex">
-            <a
-              className="grid place-items-center relative text-[12px] font-[700] text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
+            <div
+              onClick={() => {
+                setClickedSearch(!clickedSearch);
+              }}
+              className={`relative flex justify-center items-center border-r border-[#dee1ea] h-full py-0 px-[15px] text-[#213875] ${
+                clickedSearch
+                  ? "w-[200px] transition-all duration-300 ease-in-out"
+                  : "w-[100px] transition-all duration-300 ease-in-out"
+              }`}
             >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                LADIES
-              </span>
-            </a>
-            <a
-              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
-            >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                GENTLEMEN
-              </span>
-            </a>
-            <a
-              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
-            >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                GIRLS
-              </span>
-            </a>
-            <a
-              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
-            >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                BOYS
-              </span>
-            </a>
-            <a
-              className="grid place-items-center relative text-[12px] font-bold text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
-            >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                TODDLERS
-              </span>
-            </a>
-            <a
-              className="grid place-items-center relative text-[12px] font-bold text-[#ca3333] hover:text-[#213875] tracking-[1px] no-underline py-0 px-[18px] h-[59px] leading-[12px] border-r border-[#dee1ea]"
-              href="#"
-            >
-              <span className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 hover:after:w-[100%] after:h-[1px] after:transition-[width] after:duration-[550ms] after:ease-[cubic-bezier(.19,1,.22,1)] after:delay-0 after:bg-[#213875]">
-                SALE
-              </span>
-            </a>
+              <label
+                className={`absolute transition-all duration-300 ease-in ${
+                  clickedSearch
+                    ? "z-10 transform -translate-x-[70px] -translate-y-[13px] text-xs transition-all duration-300 ease-in"
+                    : ""
+                }`}
+                htmlFor="search"
+              >
+                Search
+              </label>
+              <input
+                onClick={(e) => e.stopPropagation()}
+                disabled={!clickedSearch}
+                value={searchInput}
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                }}
+                className={`${
+                  clickedSearch
+                    ? "w-full focus:outline-none mt-3 disabled:bg-inherit"
+                    : "w-0 overflow-hidden"
+                }`}
+                id="search"
+                type="text"
+              />
+              <button
+                onClick={(e) => handleSearch(e)}
+                className={`mt-2 ${clickedSearch ? "block" : "hidden"}`}
+              >
+                {" "}
+                <svg
+                  width="1rem"
+                  height="1rem"
+                  className="overflow-hidden"
+                  viewBox="0 0 31 31"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="nonzero"
+                    d="M4,13.293 C4,8.169 8.169,4 13.293,4 C18.418,4 22.587,8.169 22.587,13.293 C22.587,18.418 18.418,22.587 13.293,22.587 C8.169,22.587 4,18.418 4,13.293 M29.684,26.638 L24.08,21.033 C25.65,18.851 26.587,16.182 26.587,13.293 C26.587,5.963 20.624,0 13.293,0 C5.963,0 0,5.963 0,13.293 C0,20.623 5.963,26.587 13.293,26.587 C16.294,26.587 19.056,25.576 21.283,23.893 L26.856,29.466 C27.246,29.856 27.758,30.052 28.27,30.052 C28.782,30.052 29.294,29.856 29.684,29.466 C30.465,28.685 30.465,27.419 29.684,26.638"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </nav>
         </div>
+        {/* Logo */}
         <div className="grow-[3] grid place-items-center p-[5px]">
           <Link to={"/"}>
             <img src="/img/LOGO.png" alt="" width={40} />
@@ -138,9 +154,9 @@ function Navbar() {
                 ) : (
                   <Link
                     to="/login"
-                    className="relative grid place-items-center w-[100px] h-full py-0 px-[15px] text-[#213875]"
+                    className="relative grid place-items-center w-[100px] h-full py-0 px-[15px] hover:text-white text-[#213875] before:block before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[#213875] before:scale-y-0 hover:before:scale-y-[100%] before:origin-top hover:before:origin-bottom before:transition-transform before:duration-[700ms] before:ease-[cubic-bezier(0.19,1,0.22,1)] before:delay-0 before:z-0"
                   >
-                    <span className="text-center w-full overflow-hidden text-ellipsis leading-[22px]">
+                    <span className="relative text-center w-full overflow-hidden text-ellipsis leading-[22px]">
                       Login
                     </span>
                   </Link>
@@ -158,10 +174,6 @@ function Navbar() {
                     </button>
                   </div>
                 )}
-              </div>
-
-              <div className="flex items-center h-full border-l mb-[1em] py-0 px-[24px] cursor-pointer text-[#213875]">
-                Search
               </div>
             </div>
           </div>

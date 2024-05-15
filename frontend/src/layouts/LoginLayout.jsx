@@ -29,27 +29,26 @@ function LoginLayout() {
       return;
     }
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-      {
-        email,
-        password,
-      }
-    );
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        {
+          email,
+          password,
+        }
+      );
 
-    console.log(response.data);
-    if (response.status !== 200) {
-      toast.error("Login failed");
-      return;
+      console.log(response.data);
+      const { token } = response.data;
+      sessionStorage.setItem("token", token);
+      toast.success("Login successful");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      const { response } = error;
+      toast.error(response.data.message);
     }
-
-    const { token } = response.data;
-    sessionStorage.setItem("token", token);
-
-    toast.success("Login successful");
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
   };
 
   return (
