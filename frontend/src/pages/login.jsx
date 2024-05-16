@@ -1,9 +1,8 @@
-import LoginLayout from "../layouts/LoginLayout";
+// import LoginLayout from "../layouts/LoginLayout";
+import LoginLayouts from "../layouts/LoginLayouts";
 
-function Login(){
-    return(
-        <LoginLayout />
-    )
+function Login() {
+  return <LoginLayouts />;
 }
 
-export default Login
+export default Login;
