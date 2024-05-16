@@ -65,7 +65,11 @@ const ListProductSlider = ({ listImage }) => {
             listImage ? "after:bg-[url(" + listImage[0] + ")]" : ""
           } after:bg-cover after:transition-all after:duration-[250ms] after:opacity-100 after:group-hover:opacity-0 ease-[cubic-bezier(0.19,1,0.22,1)]`}
         >
-          <img src={listImage[0]} alt="" className="object-cover" />
+          <img
+            src={listImage[0]}
+            alt=""
+            className="object-cover rounded-t-lg"
+          />
         </SwiperSlide>
         <SwiperSlide>
           <img src={listImage[1]} alt="" className="object-cover" />

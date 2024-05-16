@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TopBar from "../../molecules/TopBar";
 import { Cart } from "../Cart";
 import { useNavigate } from "react-router-dom";
+import { ShoppingCartIcon } from "lucide-react";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -198,7 +199,7 @@ function Navbar() {
             className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer"
           >
             <span className="w-[12rem] text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
-              shopping cart
+              <ShoppingCartIcon />
             </span>
             <span className="min-[992px]:hidden overflow-hidden px-[20px] py-[19px]">
               <svg

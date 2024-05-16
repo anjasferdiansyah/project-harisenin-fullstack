@@ -13,15 +13,19 @@ const ListProducts = () => {
   const [catTitle, setCatTitle] = useState([]);
 
   const fetchDataCategory = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/category/${catId}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/category/${catId}`
+    );
 
     setCatTitle(response.data.title);
   };
 
   const fetchData = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/category/${catId}`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/product/category/${catId}`
+    );
 
-    setData(response.data)
+    setData(response.data);
   };
 
   useEffect(() => {
@@ -44,15 +48,16 @@ const ListProducts = () => {
           </p>
         </div>
         <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 p-4 md:px-10">
-          {data && data.map((item, i) => (
-            <ListProductCard
-              key={i}
-              id={item.id}
-              listImage={item.listImage}
-              title={item.title}
-              price={`Rp${item.price.toLocaleString("id-ID")}`}
-            />
-          ))}
+          {data &&
+            data.map((item, i) => (
+              <ListProductCard
+                key={i}
+                id={item.id}
+                listImage={item.listImage}
+                title={item.title}
+                price={`Rp${item.price.toLocaleString("id-ID")}`}
+              />
+            ))}
         </div>
       </section>
       <Footer />
