@@ -1,9 +1,26 @@
+const { Op, fn, col } = require('sequelize');
 const { products } = require('../models');
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const result = await products.findAll();
-    res.json(result);
+    if (req.query.q) {
+      const searchQuery = req.query.q.toLowerCase();
+      const result = await products.findAll({
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.iLike]: `%${searchQuery}%`,
+              },
+            },
+          ],
+        },
+      });
+      res.json(result);
+    } else {
+      const result = await products.findAll();
+      res.json(result);
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -87,4 +104,4 @@ exports.getProductsByCatId = async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-}
+};
