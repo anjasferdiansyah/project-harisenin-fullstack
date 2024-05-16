@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ListProductCard from "../components/atoms/ListProductCard";
-import ListCategoryCard from "../components/atoms/ListProductCard";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { useParams } from "react-router";

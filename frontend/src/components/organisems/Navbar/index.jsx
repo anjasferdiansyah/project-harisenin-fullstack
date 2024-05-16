@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import TopBar from "../../molecules/TopBar";
 import { Cart } from "../Cart";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCartIcon } from "lucide-react";
@@ -55,7 +54,9 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate("/search", { state: { searchInput: searchInput } });
+    navigate(`/search`, {
+      state: { searchInput: searchInput },
+    });
   };
 
   const toggleDropdown = () => {
@@ -64,7 +65,7 @@ function Navbar() {
 
   return (
     <>
-      <TopBar />
+      {/* <TopBar /> */}
       <header className="flex flex-nowrap justify-between z-10 bg-[#ffffff] w-full h-[61px] sticky top-0 border-y border-[#dee1ea]">
         <div className="flex">
           <button className="grid place-items-center m-0 py-[23px] px-[32px] border-r border-[#dee1ea] cursor-pointer overflow-visible">
@@ -83,7 +84,7 @@ function Navbar() {
               }}
               className={`relative flex justify-center items-center border-r border-[#dee1ea] h-full py-0 px-[15px] text-[#213875] ${
                 clickedSearch
-                  ? "w-[200px] transition-all duration-300 ease-in-out"
+                  ? "w-[220px] transition-all duration-300 ease-in-out"
                   : "w-[100px] transition-all duration-300 ease-in-out"
               }`}
             >
@@ -95,7 +96,7 @@ function Navbar() {
                 }`}
                 htmlFor="search"
               >
-                Search
+                Cari
               </label>
               <input
                 onClick={(e) => e.stopPropagation()}
@@ -136,7 +137,38 @@ function Navbar() {
         {/* Logo */}
         <div className="grow-[3] grid place-items-center p-[5px]">
           <Link to={"/"}>
-            <img src="/img/LOGO.png" alt="" width={40} />
+            <svg
+              width="90"
+              height="50"
+              viewBox="0 0 600 148"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M459.942 2.41231V142.872H495.101V58.8266L563.112 142.872H600V2.41231H563.112L566.571 87.6094L495.101 2.41231H459.942Z"
+                fill="#213875"
+              />
+              <path
+                d="M368.3 2.41231V142.872H447.262V114.665H403.458V87.6094H447.262V58.8266H403.458V32.3464H447.262V2.41231H368.3Z"
+                fill="#213875"
+              />
+              <path
+                d="M277.233 2.41231V32.3464H310.086L264.553 142.872H300.288L358.501 2.41231H277.233Z"
+                fill="#213875"
+              />
+              <path
+                d="M200.576 2.41231L255.331 127.905L273.199 87.6094L236.311 2.41231H200.576Z"
+                fill="#213875"
+              />
+              <path
+                d="M114.121 2.41231V142.872H193.084V114.665H151.009V87.6094H193.084V58.8266H151.009V32.3464H193.084V2.41231H114.121Z"
+                fill="#213875"
+              />
+              <path
+                d="M83.5735 38.6786C73.391 32.5383 51.5274 23.1359 45.5331 34.649C39.5389 46.1622 53.7944 54.0295 61.6715 56.524C75.5043 60.1698 102.939 73.6785 102.017 98.5469C100.865 129.632 80.1153 146.902 55.3314 147.478C35.5043 147.938 10.1825 136.924 0 131.359L14.9856 103.728C20.5572 108.333 34.4668 117.544 45.5331 117.544C59.366 117.544 64.5533 108.909 65.1297 103.728C65.7061 98.5469 61.6715 89.912 45.5331 87.6094C29.3948 85.3068 5.18732 64.5832 5.18732 48.4648C5.18732 32.3464 17.2911 -2.19294 51.8732 0.109684C79.5389 1.95178 93.756 8.93641 97.4063 12.1985L83.5735 38.6786Z"
+                fill="#213875"
+              />
+            </svg>
           </Link>
         </div>
         <div className="flex grow shrink basis-0 h-[59px]">
