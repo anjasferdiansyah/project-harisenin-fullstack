@@ -50,7 +50,7 @@ export const Cart = ({ show }) => {
 
   return (
     <div
-      className={`absolute w-full md:w-[470px] max-h-screen top-[60px] right-[0] ${
+      className={`fixed w-full md:w-[470px] max-h-screen top-[60px] right-[0] ${
         show ? "" : "hidden"
       }`}
     >
@@ -60,7 +60,7 @@ export const Cart = ({ show }) => {
         } `}
       >
         <ToastContainer />
-        <ul className="p-11 bg-white overflow-y-auto md:h-[73vh] h-[45vh] scrollbar-thin scrollbar-thumb-[#4a5568] scrollbar-track-[#cbd5e0]">
+        <ul className="p-11 bg-white overflow-y-auto md:h-[73vh] h-[70vh] scrollbar-thin scrollbar-thumb-[#4a5568] scrollbar-track-[#cbd5e0]">
           {cartItems.map((item) => (
             <li className="flex pt-5 pb-8 border-b border-gray-200" key={item.productId}>
               <div className="w-28 mr-4">

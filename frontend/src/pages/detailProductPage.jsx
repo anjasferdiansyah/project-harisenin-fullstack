@@ -31,7 +31,7 @@ const DetailProductPage = ({ userId }) => {
     }
 
     const { listImage } = response.data;
-    const imgArray = response.data && listImage.split(", ");
+    const imgArray = response.data && listImage.split(",");
     setData({ ...response.data, listImage: imgArray });
   };
 
