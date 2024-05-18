@@ -79,7 +79,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="flex px-8 flex-nowrap justify-between z-10 bg-[#ffffff] h-[61px] items-center sticky top-0 border-y border-[#dee1ea]">
+      <header className="flex px-8 flex-nowrap justify-between z-[99] bg-[#ffffff] h-[61px] items-center sticky top-0 border-y border-[#dee1ea]">
         {/* Search Button */}
         <div className=" hidden md:flex h-full">
           <div
