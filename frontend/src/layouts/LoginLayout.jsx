@@ -2,11 +2,13 @@ import { useState } from "react";
 import Navbar from "../components/organisems/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/action/authAction";
 
 function LoginLayout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,35 +23,15 @@ function LoginLayout() {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const { email, password } = formData;
 
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
+    if(!email || !password){
+      toast.error('Please fill in all fields')
       return;
     }
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-      {
-        email,
-        password,
-      }
-    );
-
-    console.log(response.data);
-    if (response.status !== 200) {
-      toast.error("Login failed");
-      return;
-    }
-
-    const { token } = response.data;
-    sessionStorage.setItem("token", token);
-
-    toast.success("Login successful");
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    dispatch(login(email, password, navigate));
   };
 
   return (

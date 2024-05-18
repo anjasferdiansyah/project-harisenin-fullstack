@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/reducer/cartSlice";
+import { addToCart } from "../store/action/cartAction";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -13,8 +13,9 @@ import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-const DetailProductPage = () => {
+const DetailProductPage = ({ userId }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const dispatch = useDispatch();
@@ -35,14 +36,22 @@ const DetailProductPage = () => {
     setData({ ...response.data, listImage: imgArray });
   };
 
-  console.log(data);
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  const onClickAddToCart = (product) => {
-    dispatch(addToCart({ ...product, quantity: qty }));
+  const onClickAddToCart = () => {
+    const token = sessionStorage.getItem("token");
+    if(!token){
+      setTimeout(() => {
+        toast.error('Please login first')
+      }, 2000);
+      return;
+    }
+    setTimeout(() => {
+      toast.success('Add to cart successfully')
+    }, 2000);
+    dispatch(addToCart(token, data && data.id, qty))
   };
 
   const incrementQty = () => {
@@ -63,6 +72,7 @@ const DetailProductPage = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className="flex justify-center flex-wrap">
         <Navbar />
         <div className="container max-w-sm ">
@@ -164,7 +174,7 @@ const DetailProductPage = () => {
             </div>
             <div>
               <button
-                onClick={() => onClickAddToCart(data && data)}
+                onClick={onClickAddToCart}
                 className=" bg-blue-900 text-white w-full p-2 rounded font-semibold hover:bg-white hover:text-blue-800 border hover:scale-105"
               >
                 Add to cart
@@ -178,6 +188,7 @@ const DetailProductPage = () => {
       <Footer />
     </div>
   );
+
 };
 
-export default DetailProductPage;
+export default DetailProductPage

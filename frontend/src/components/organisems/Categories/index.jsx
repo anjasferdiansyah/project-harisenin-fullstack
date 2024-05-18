@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import CategoryCard from "../../atoms/CategoryCard";
-import { useParams } from "react-router";
 import axios from "axios";
 
 function Categories() {
@@ -12,8 +11,6 @@ function Categories() {
 
     setData(response.data);
   };
-
-  console.log(data);
 
   useEffect(() => {
     fetchData();
