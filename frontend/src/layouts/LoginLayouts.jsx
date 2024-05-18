@@ -5,8 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/action/authAction";
 
 function LoginLayouts() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -30,37 +33,15 @@ function LoginLayouts() {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+    e.preventDefault()
     const { email, password } = formData;
 
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
+    if(!email || !password){
+      toast.error('Please fill in all fields')
       return;
     }
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-        {
-          email,
-          password,
-        }
-      );
-
-      const { token } = response.data;
-      sessionStorage.setItem("token", token);
-
-      toast.success("Login successful");
-      setIsLoading(false);
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    } catch (error) {
-      const { message } = error.response.data;
-      toast.error(message);
-      setIsLoading(false);
-    }
+    dispatch(login(email, password, navigate));
   };
 
   return (

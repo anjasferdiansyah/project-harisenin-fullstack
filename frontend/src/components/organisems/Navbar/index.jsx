@@ -260,22 +260,11 @@ function Navbar() {
             onClick={toggleCart}
             className="flex items-center justify-center h-[59px] border-l border-[#dee1ea] text-[#213875] cursor-pointer"
           >
-            <span className="w-[12rem] text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
+            <span className=" text-[12px] font-bold uppercase tracking-[1px] leading-[12px] max-[992px]:hidden px-[35px] py-[19px]">
               <ShoppingCartIcon />
             </span>
             <span className="min-[992px]:hidden overflow-hidden px-[20px] py-[19px]">
-              <svg
-                viewBox="0 0 35.8 40"
-                className=""
-                width="1rem"
-                height="1rem"
-              >
-                <path
-                  fill="currentColor"
-                  fillRule="nonzero"
-                  d="m29.3 12.7h-2.1v-4.2c0-.2 0-.3 0-.5-.3-4.5-4.6-8-9.4-8s-9.2 3.5-9.4 8v.5 4.2h-2.1c-3.7 0-6.3 2.2-6.3 5.8v19.3c0 1.2 1 2.2 2.3 2.2h31.2c1.3 0 2.3-1 2.3-2.1v-19.5c-.2-3.6-2.7-5.7-6.5-5.7zm-16.7-4.2c0-2.4 2.8-4.1 5.2-4.1s5.2 1.7 5.2 4.1v.3 3.9h-10.5zm18.8 27.2h-27.2v-16.7c0-1.2.9-2.1 2.1-2.1h2.1v2c0 1.2.9 2.1 2.1 2.1s2.1-1 2.1-2.1v-2h10.5v2.1c0 1.2.9 2.1 2.1 2.1 1.1 0 2.1-1 2.1-2.1v-2.1h2.1c1.2 0 2.1.9 2.1 2.1v16.7z"
-                ></path>
-              </svg>
+              <ShoppingCartIcon />
             </span>
           </button>
           <Cart show={viewCart} />
