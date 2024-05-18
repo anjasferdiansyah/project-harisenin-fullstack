@@ -24,7 +24,7 @@ export const Cart = ({ show }) => {
   
     // Handling loading and error states
     if (error) return <div>Failed to load cart</div>;
-    if (!cartItems) return <div>Loading...</div>;
+    if (!cartItems) return <div></div>;
   
     const total = cartItems.reduce((acc, item) =>{
       const price =item.product && item.product.price ? item.product.price : 0;
