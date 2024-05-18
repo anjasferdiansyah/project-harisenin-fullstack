@@ -67,15 +67,6 @@ function Navbar() {
     <>
       {/* <TopBar /> */}
       <header className="flex flex-nowrap justify-between z-10 bg-[#ffffff] w-full h-[61px] sticky top-0 border-y border-[#dee1ea]">
-        <div className="flex">
-          <button className="grid place-items-center m-0 py-[23px] px-[32px] border-r border-[#dee1ea] cursor-pointer overflow-visible">
-            <span className="bg-[#213875] w-[19px] h-[2px] mb-[3px] relative"></span>
-            <span className="bg-[#213875] w-[19px] h-[2px] mb-[3px] relative"></span>
-            <span className="text-center text-[8px] text-500 leading-[8px]">
-              MENU
-            </span>
-          </button>
-        </div>
         <div className="hidden min-[940px]:contents">
           <nav className="flex">
             <div
@@ -210,8 +201,47 @@ function Navbar() {
               </div>
             </div>
           </div>
-          <div className="contents min-[940px]:hidden">
-            <button className="flex flex-nowrap items-center justify-center h-[59px] text-[#213875] cursor-pointer max-[1310px]:py-[19px] max-[1310px]:px-[20px] border-l border-[#dee1ea]">
+
+          <div
+            onClick={() => {
+              setClickedSearch(!clickedSearch);
+            }}
+            className={`min-[940px]:hidden relative flex justify-center items-center border-r border-l border-[#dee1ea] h-full py-0 px-[15px] text-[#213875] ${
+              clickedSearch
+                ? "w-[220px] transition-all duration-300 ease-in-out"
+                : "w-[100px] transition-all duration-300 ease-in-out"
+            }`}
+          >
+            <label
+              className={`absolute transition-all duration-300 ease-in ${
+                clickedSearch
+                  ? "z-10 transform -translate-x-[70px] -translate-y-[13px] text-xs transition-all duration-300 ease-in"
+                  : ""
+              }`}
+              htmlFor="search"
+            >
+              Cari
+            </label>
+            <input
+              onClick={(e) => e.stopPropagation()}
+              disabled={!clickedSearch}
+              value={searchInput}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
+              className={`${
+                clickedSearch
+                  ? "w-full focus:outline-none mt-3 disabled:bg-inherit"
+                  : "w-0 overflow-hidden"
+              }`}
+              id="search"
+              type="text"
+            />
+            <button
+              onClick={(e) => handleSearch(e)}
+              className={`mt-2 ${clickedSearch ? "block" : "hidden"}`}
+            >
+              {" "}
               <svg
                 width="1rem"
                 height="1rem"

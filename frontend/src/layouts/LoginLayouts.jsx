@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/organisems/Navbar";
 import Footer from "../components/organisems/Footer";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,6 +13,14 @@ function LoginLayouts() {
     password: "",
   });
 
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -23,6 +31,7 @@ function LoginLayouts() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const { email, password } = formData;
 
     if (!email || !password) {
@@ -30,27 +39,28 @@ function LoginLayouts() {
       return;
     }
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
-      {
-        email,
-        password,
-      }
-    );
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        {
+          email,
+          password,
+        }
+      );
 
-    console.log(response.data);
-    if (response.status !== 200) {
-      toast.error("Login failed");
-      return;
+      const { token } = response.data;
+      sessionStorage.setItem("token", token);
+
+      toast.success("Login successful");
+      setIsLoading(false);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      const { message } = error.response.data;
+      toast.error(message);
+      setIsLoading(false);
     }
-
-    const { token } = response.data;
-    sessionStorage.setItem("token", token);
-
-    toast.success("Login successful");
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
   };
 
   return (
@@ -80,12 +90,13 @@ function LoginLayouts() {
           />
           <button
             type="submit"
+            disabled={isLoading}
             className="bg-[#213775] text-white py-2 px-8 w-full mt-8 uppercase hover:bg-[#213775]/95"
           >
-            Login
+            {isLoading ? "Loading..." : "Login"}
           </button>
           <p className="text-center text-black mt-6">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="/register" className="text-[#213775] underline">
               Register
             </a>

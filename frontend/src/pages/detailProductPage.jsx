@@ -35,8 +35,6 @@ const DetailProductPage = () => {
     setData({ ...response.data, listImage: imgArray });
   };
 
-  console.log(data);
-
   useEffect(() => {
     fetchData();
   }, []);
