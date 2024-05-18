@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart, removeFromCart, incrementQty, decrementQty } from "../../../store/action/cartAction";
@@ -115,7 +114,7 @@ export const Cart = ({ show }) => {
         </ul>
         <div className="my-auto"></div>
         <hr />
-        <div className="p-11 text-[#213875] bg-white">
+        <div className="absolute bottom-100 p-11 w-full text-[#213875] bg-white">
           <div className="flex my-5 text-xl mt-2 font-bold m-0">
             <p>TOTAL</p>
             <div className="mx-auto"></div>
