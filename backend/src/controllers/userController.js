@@ -97,7 +97,7 @@ const login = async (req, res) => {
 
     console.log(getUser);
     if (!getUser) {
-      res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     const comparedPassword = bcrypt.compareSync(
@@ -106,7 +106,7 @@ const login = async (req, res) => {
     );
 
     if (!comparedPassword) {
-      res.status(401).json({ message: 'Wrong password' });
+      return res.status(401).json({ message: 'Wrong password' });
     }
 
     const token = jwt.sign(
