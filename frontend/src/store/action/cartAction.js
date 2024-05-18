@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ADD_TO_CART, ADD_TO_CART_FAILURE, FETCH_CART, FETCH_CART_FAILURE, REMOVE_FROM_CART, REMOVE_FROM_CART_FAILURE } from '../types';
+import { ADD_TO_CART, ADD_TO_CART_FAILURE, FETCH_CART, FETCH_CART_FAILURE, REMOVE_FROM_CART, REMOVE_FROM_CART_FAILURE, INCREMENT_QTY, DECREMENT_QTY } from '../types';
+import { mutate } from 'swr';
 
 export const addToCart = (token, productId, qty) => async (dispatch) => {
   try {
@@ -17,6 +18,7 @@ export const addToCart = (token, productId, qty) => async (dispatch) => {
       type: ADD_TO_CART,
       payload: response.data,
     });
+    mutate('http://localhost:5000/api/cart');
   } catch (error) {
     dispatch({
       type: ADD_TO_CART_FAILURE,
@@ -36,6 +38,7 @@ export const fetchCart = (token) => async (dispatch) => {
       type: FETCH_CART,
       payload: response.data,
     });
+    mutate('http://localhost:5000/api/cart');
   } catch (error) {
     dispatch({
       type: FETCH_CART_FAILURE,
@@ -58,6 +61,7 @@ export const removeFromCart = (token, productId) => async (dispatch) => {
       type: REMOVE_FROM_CART,
       payload: productId,
     });
+    mutate('http://localhost:5000/api/cart');
   } catch (error) {
     dispatch({
       type: REMOVE_FROM_CART_FAILURE,
@@ -65,3 +69,48 @@ export const removeFromCart = (token, productId) => async (dispatch) => {
     });
   }
 }
+
+export const incrementQty = (token, productId) => async (dispatch) => {
+    try {
+      const response = await axios.put(
+        'http://localhost:5000/api/cart/increment',
+        { productId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+  
+      dispatch({
+        type: INCREMENT_QTY,
+        payload: response.data,
+      });
+
+      mutate('http://localhost:5000/api/cart');
+    } catch (error) {
+      console.error('Error incrementing quantity:', error);
+    }
+  };
+  
+  export const decrementQty = (token, productId) => async (dispatch) => {
+    try {
+      const response = await axios.put(
+        'http://localhost:5000/api/cart/decrement',
+        { productId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+  
+      dispatch({
+        type: DECREMENT_QTY,
+        payload: response.data,
+      });
+      mutate('http://localhost:5000/api/cart');
+    } catch (error) {
+      console.error('Error decrementing quantity:', error);
+    }
+  };

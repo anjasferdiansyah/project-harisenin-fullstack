@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_TO_CART_FAILURE, FETCH_CART, FETCH_CART_FAILURE, REMOVE_FROM_CART, REMOVE_FROM_CART_FAILURE } from '../types';
+import { ADD_TO_CART, ADD_TO_CART_FAILURE, FETCH_CART, FETCH_CART_FAILURE, REMOVE_FROM_CART, REMOVE_FROM_CART_FAILURE, INCREMENT_QTY, DECREMENT_QTY } from '../types';
 
 const initialState = {
   items: [],
@@ -43,6 +43,24 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case INCREMENT_QTY:
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.productId === action.payload.productId
+            ? { ...item, qty: item.qty + 1 }
+            : item
+        ),
+      };
+    case DECREMENT_QTY:
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.productId === action.payload.productId
+            ? { ...item, qty: Math.max(item.qty - 1, 1) }
+            : item
+        ),
       };
     default:
       return state;
