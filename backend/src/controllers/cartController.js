@@ -63,7 +63,7 @@ const getUserCart = async(req, res) => {
     const formattedCartItems = cartItems.map((item) => {
       const formattedProduct = item.toJSON();
       if(formattedProduct.product) {
-        formattedProduct.product.listImage = formattedProduct.product.listImage.split(', ');
+        formattedProduct.product.listImage = formattedProduct.product.listImage.split(',');
       }
       return formattedProduct;
     });

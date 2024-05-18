@@ -14,7 +14,7 @@ import { mutate } from "swr";
 export const addToCart = (token, productId, qty) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/cart/add",
+      `${import.meta.env.VITE_BACKEND_URL}/api/cart/add`,
       { productId, qty },
       {
         headers: {
@@ -27,7 +27,7 @@ export const addToCart = (token, productId, qty) => async (dispatch) => {
       type: ADD_TO_CART,
       payload: response.data,
     });
-    mutate("http://localhost:5000/api/cart");
+    mutate(`${import.meta.env.VITE_BACKEND_URL}/api/cart`);
   } catch (error) {
     dispatch({
       type: ADD_TO_CART_FAILURE,
@@ -38,16 +38,19 @@ export const addToCart = (token, productId, qty) => async (dispatch) => {
 
 export const fetchCart = (token) => async (dispatch) => {
   try {
-    const response = await axios.get("http://localhost:3000/api/cart", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     dispatch({
       type: FETCH_CART,
       payload: response.data,
     });
-    mutate("http://localhost:3000/api/cart");
+    mutate(`${import.meta.env.VITE_BACKEND_URL}/api/cart`);
   } catch (error) {
     dispatch({
       type: FETCH_CART_FAILURE,
@@ -59,7 +62,7 @@ export const fetchCart = (token) => async (dispatch) => {
 export const removeFromCart = (token, productId) => async (dispatch) => {
   try {
     const response = await axios.delete(
-      `http://localhost:3000/api/cart/remove`,
+      `${import.meta.env.VITE_BACKEND_URL}/api/cart/remove`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -73,7 +76,7 @@ export const removeFromCart = (token, productId) => async (dispatch) => {
       type: REMOVE_FROM_CART,
       payload: productId,
     });
-    mutate("http://localhost:5000/api/cart");
+    mutate(`${import.meta.env.VITE_BACKEND_URL}/api/cart`);
   } catch (error) {
     dispatch({
       type: REMOVE_FROM_CART_FAILURE,
@@ -85,7 +88,7 @@ export const removeFromCart = (token, productId) => async (dispatch) => {
 export const incrementQty = (token, productId) => async (dispatch) => {
   try {
     const response = await axios.put(
-      "http://localhost:5000/api/cart/increment",
+      `${import.meta.env.VITE_BACKEND_URL}/api/cart/increment`,
       { productId },
       {
         headers: {
@@ -99,7 +102,7 @@ export const incrementQty = (token, productId) => async (dispatch) => {
       payload: response.data,
     });
 
-    mutate("http://localhost:5000/api/cart");
+    mutate(`${import.meta.env.VITE_BACKEND_URL}/api/cart`);
   } catch (error) {
     console.error("Error incrementing quantity:", error);
   }
@@ -108,7 +111,7 @@ export const incrementQty = (token, productId) => async (dispatch) => {
 export const decrementQty = (token, productId) => async (dispatch) => {
   try {
     const response = await axios.put(
-      "http://localhost:5000/api/cart/decrement",
+      `${import.meta.env.VITE_BACKEND_URL}/api/cart/decrement`,
       { productId },
       {
         headers: {
@@ -121,7 +124,7 @@ export const decrementQty = (token, productId) => async (dispatch) => {
       type: DECREMENT_QTY,
       payload: response.data,
     });
-    mutate("http://localhost:5000/api/cart");
+    mutate(`${import.meta.env.VITE_BACKEND_URL}/api/cart`);
   } catch (error) {
     console.error("Error decrementing quantity:", error);
   }

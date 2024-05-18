@@ -97,47 +97,52 @@ const Checkout = () => {
               key={item.productId}
             >
               <div className="w-28 mr-4">
-                <img src={item.product.listImage[0]} alt={item.product.title} />
+                {item.product && item.product.listImage ? (
+                  <img
+                    className="w-full h-full"
+                    src={item.product.listImage[0]}
+                    alt="image"
+                  />
+                ) : (
+                  <div className="w-28 h-28 bg-gray-300" />
+                )}
               </div>
               <div className="flex flex-col w-full ">
                 <div className="flex text-md text-[#213775]">
-                  <p className="font-semibold">{item.product.title}</p>
+                  <p className="font-semibold">
+                    {item.product && item.product.title}
+                  </p>
                   <div className="mx-auto"></div>
                   <p className="font-semibold text-md">
-                    Rp{item.product.price.toLocaleString("id-ID")}
+                    Rp
+                    {item.product && item.product.price.toLocaleString("id-ID")}
                   </p>
                 </div>
                 <div className=" flex m-2 ">
                   <div className="flex border border-blue-200 w-max">
-                    <div
+                    {/* <div
                       onClick={() => onClickDecrementQty(item.productId)}
                       id="decrement"
                       className="mx-1.5  cursor-pointer font-bold"
                     >
                       -
-                    </div>
-                    {/* <input
-                      type="text"
-                      className="w-7 text-center border"
-                      id="inputQty"
-                      value={item.qty}
-                      onChange={onChangeQty}
-                    /> */}
+                    </div> */}
+                    <p className="w-7 text-center border">{item && item.qty}</p>
 
-                    <div
+                    {/* <div
                       onClick={() => onClickIncrementQty(item.productId)}
                       id="increment"
                       className="mx-1.5  cursor-pointer font-bold"
                     >
                       +
-                    </div>
+                    </div> */}
                   </div>
-                  <div
+                  {/* <div
                     onClick={() => onClickRemoveFromCart(item.productId)}
                     className="ml-5 text-xs my-auto text-gray-500 cursor-pointer"
                   >
                     BUANG
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </li>

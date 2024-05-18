@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeFromCart, incrementQty, decrementQty } from "../../../store/action/cartAction";
-import { ToastContainer} from "react-toastify";
+import {
+  fetchCart,
+  removeFromCart,
+  incrementQty,
+  decrementQty,
+} from "../../../store/action/cartAction";
+import { ToastContainer } from "react-toastify";
 import useSwr from "swr";
 import axios from "axios";
 
@@ -10,38 +14,41 @@ const fetcher = async (url) => {
   const token = sessionStorage.getItem("token");
   const response = await axios.get(url, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.data;
 };
 
 export const Cart = ({ show }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const token = sessionStorage.getItem("token");
 
-  const { data: cartItems, error} = useSwr(token ? `${import.meta.env.VITE_BACKEND_URL}/api/cart` : null, fetcher)
-  
-    // Handling loading and error states
-    if (error) return <div>Failed to load cart</div>;
-    if (!cartItems) return <div></div>;
-  
-    const total = cartItems.reduce((acc, item) =>{
-      const price =item.product && item.product.price ? item.product.price : 0;
-      const totalPrice = price * item.qty;
-      return acc + totalPrice;
-    }, 0);
+  const { data: cartItems, error } = useSwr(
+    token ? `${import.meta.env.VITE_BACKEND_URL}/api/cart` : null,
+    fetcher
+  );
+
+  // Handling loading and error states
+  if (error) return <div>Failed to load cart</div>;
+  if (!cartItems) return <div></div>;
+
+  const total = cartItems.reduce((acc, item) => {
+    const price = item.product && item.product.price ? item.product.price : 0;
+    const totalPrice = price * item.qty;
+    return acc + totalPrice;
+  }, 0);
 
   const onClickRemoveFromCart = (productId) => {
-    dispatch(removeFromCart(token, productId))
+    dispatch(removeFromCart(token, productId));
   };
 
   const onClickIncrementQty = (productId) => {
-    dispatch(incrementQty(token, productId))
+    dispatch(incrementQty(token, productId));
   };
 
   const onClickDecrementQty = (productId) => {
-    dispatch(decrementQty(token, productId))
+    dispatch(decrementQty(token, productId));
   };
 
   const onChangeQty = (e) => {
@@ -50,24 +57,22 @@ export const Cart = ({ show }) => {
 
   return (
     <div
-      className={`absolute w-full md:w-[470px] max-h-screen top-[60px] right-[0] ${
+      className={`fixed w-full md:w-[470px] max-h-screen top-[60px] right-[0] ${
         show ? "" : "hidden"
       }`}
     >
       <div
-        className={`flex-col bg-white w-full max-h-screen border border-t-1 right-0 top-[60px]  transition-transform   ${
-          show ? "" : "translate-x-full"
-        } `}
+        className={`flex-col bg-white w-full border border-t-1 right-0 top-[60px]`}
       >
         <ToastContainer />
-        <ul className="p-11 bg-white overflow-y-auto md:h-[73vh] h-[45vh] scrollbar-thin scrollbar-thumb-[#4a5568] scrollbar-track-[#cbd5e0]">
+        <ul className="p-11 bg-white overflow-y-scroll h-[calc(100vh-240px)] scrollbar-thin scrollbar-thumb-[#4a5568] scrollbar-track-[#cbd5e0]">
           {cartItems.map((item) => (
-            <li className="flex pt-5 pb-8 border-b border-gray-200" key={item.productId}>
+            <li
+              className="flex pt-5 pb-8 border-b border-gray-200"
+              key={item.productId}
+            >
               <div className="w-28 mr-4">
-                  <img
-                    src={item.product.listImage[0]}
-                    alt={item.product.title}
-                  />
+                <img src={item.product.listImage[0]} alt={item.product.title} />
               </div>
               <div className="flex flex-col w-full ">
                 <div className="flex text-md text-[#213775]">
@@ -115,7 +120,7 @@ export const Cart = ({ show }) => {
         </ul>
         <div className="my-auto"></div>
         <hr />
-        <div className="p-11 text-[#213875] bg-white">
+        <div className="p-11 w-full text-[#213875] bg-white">
           <div className="flex my-5 text-xl mt-2 font-bold m-0">
             <p>TOTAL</p>
             <div className="mx-auto"></div>

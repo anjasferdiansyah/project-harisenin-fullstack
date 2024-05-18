@@ -14,7 +14,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import HomeLayouts from "../layouts/HomeLayouts";
 
-const DetailProductPage = ({ userId }) => {
+const DetailProductPage = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const DetailProductPage = ({ userId }) => {
     }
 
     const { listImage } = response.data;
-    const imgArray = response.data && listImage.split(", ");
+    const imgArray = response.data && listImage.split(",");
     setData({ ...response.data, listImage: imgArray });
   };
 
