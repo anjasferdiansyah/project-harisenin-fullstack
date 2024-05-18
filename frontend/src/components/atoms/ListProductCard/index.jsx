@@ -4,7 +4,7 @@ import ListProductSlider from "../ListProductSlider";
 
 const ListProductCard = ({ listImage, title, price, id }) => {
   console.log(listImage);
-  const imgs = listImage.split(", ");
+  const imgs = listImage.split(",");
 
   return (
     <div className=" p-4 shadow-md rounded-t-md">

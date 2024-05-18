@@ -217,8 +217,8 @@ const Navbar = () => {
             onClick={toggleCart}
           >
             <ShoppingCartIcon />
-            <Cart show={viewCart} />
           </div>
+          <Cart show={viewCart} />
         </div>
 
         {/* Mobile Menu */}
