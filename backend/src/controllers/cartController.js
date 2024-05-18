@@ -60,7 +60,15 @@ const getUserCart = async(req, res) => {
       ]
     });
 
-    res.status(200).json(cartItems);
+    const formattedCartItems = cartItems.map((item) => {
+      const formattedProduct = item.toJSON();
+      if(formattedProduct.product) {
+        formattedProduct.product.listImage = formattedProduct.product.listImage.split(', ');
+      }
+      return formattedProduct;
+    });
+
+    res.status(200).json(formattedCartItems);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving cart items', error: error.message });
   }
@@ -111,4 +119,67 @@ const deleteItemCart = async (req, res) => {
   }
 };
 
-module.exports = { addToCart, getUserCart, deleteItemCart, updateItemCart };
+const incrementQty = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const username = decoded.username;
+
+    const userFound = await user.findOne({ where: { username: username } });
+
+    if (!userFound) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const cartItem = await cart.findOne({ 
+      where: { userId: userFound.id, productId: productId }
+    });
+
+    if (cartItem) {
+      cartItem.qty += 1;
+      await cartItem.save();
+      res.status(200).json(cartItem);
+    } else {
+      res.status(404).json({ message: 'Cart item not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error incrementing quantity', error: error.message });
+  }
+};
+
+const decrementQty = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const username = decoded.username;
+
+    const userFound = await user.findOne({ where: { username: username } });
+
+    if (!userFound) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const cartItem = await cart.findOne({ 
+      where: { userId: userFound.id, productId: productId }
+    });
+
+    if (cartItem) {
+      if (cartItem.qty > 1) {
+        cartItem.qty -= 1;
+        await cartItem.save();
+        res.status(200).json(cartItem);
+      } else {
+        res.status(400).json({ message: 'Quantity cannot be less than 1' });
+      }
+    } else {
+      res.status(404).json({ message: 'Cart item not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error decrementing quantity', error: error.message });
+  }
+};
+
+
+module.exports = { addToCart, getUserCart, deleteItemCart, updateItemCart, incrementQty, decrementQty };
