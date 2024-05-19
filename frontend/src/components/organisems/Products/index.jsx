@@ -19,7 +19,7 @@ const Products = () => {
   return (
     <section className="container mx-auto mt-16 px-4" id="all-products">
       <div className="text-center">
-        <h1 className="text-[#213875] text-4xl font-bold mb-4">All Product</h1>
+        <h1 className="text-[#213875] text-4xl font-bold mb-4">Semua Produk</h1>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8">
         {data.map((item, i) => (

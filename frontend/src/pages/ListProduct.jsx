@@ -37,7 +37,7 @@ const ListProducts = () => {
       <Navbar />
       <section className="py-4">
         <div className="text-center">
-          <p className="text-[#213875] font-semibold">Category</p>
+          <p className="text-[#213875] font-semibold">Kategori</p>
           <h1 className="text-[#213875] text-4xl font-bold mb-4">
             {catData.title}
           </h1>

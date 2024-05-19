@@ -176,7 +176,7 @@ const DetailProductPage = () => {
                   onClick={onClickAddToCart}
                   className=" bg-blue-900 text-white w-full p-2 rounded font-semibold hover:bg-white hover:text-blue-800 border hover:scale-105"
                 >
-                  Add to cart
+                  Keranjang
                 </button>
               </div>
             </div>

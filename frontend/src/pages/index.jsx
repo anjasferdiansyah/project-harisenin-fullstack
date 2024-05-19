@@ -11,7 +11,6 @@ function Homepage() {
         <HeroSection />
         <Categories />
         <Products />
-        {/* <PopularCategory /> */}
       </HomeLayouts>
     </>
   );
