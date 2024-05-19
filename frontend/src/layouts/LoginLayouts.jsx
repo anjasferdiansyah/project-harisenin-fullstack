@@ -48,7 +48,7 @@ function LoginLayouts() {
     <>
       <Navbar />
       <ToastContainer />
-      <div className="container max-w-lg mx-auto my-16 text-[#213775] p-5">
+      <div className="container max-w-lg mx-auto my-16 text-[#213775] p-5 h-[calc(92vh-240px)]">
         <h1 className="text-3xl md:text-5xl pb-8 font-bold text-center">
           Customer Login
         </h1>
