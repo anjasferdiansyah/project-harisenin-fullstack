@@ -159,9 +159,9 @@ const Checkout = () => {
         <button
           onClick={handleCheckout}
           type="submit"
-          className="text-white text-xs uppercase tracking-[0.18em] bg-[#213775] w-full md:w-52 p-3 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0 "
+          className="text-white uppercase tracking-[0.18em] bg-[#213775] w-full md:w-52 p-3 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0 "
         >
-          Proceed to payment
+          Bayar Sekarang
         </button>
       </div>
 

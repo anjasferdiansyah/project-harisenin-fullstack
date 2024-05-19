@@ -1,8 +1,8 @@
 // authActions.js
 
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../types';
+import axios from "axios";
+import { toast } from "react-toastify";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../types";
 
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
@@ -33,19 +33,19 @@ export const login = (email, password, navigate) => {
 
       if (response.status === 200) {
         const { token, userId } = response.data;
-        sessionStorage.setItem('token', token);
+        sessionStorage.setItem("token", token);
         dispatch(loginSuccess(userId, token));
-        toast.success('Login successful');
+        toast.success("Anda Berhasil Masuk");
         setTimeout(() => {
-            navigate('/');
-          }, 2000);
+          navigate("/");
+        }, 2000);
       } else {
-        dispatch(loginFailure('Login failed'));
-        toast.error('Login failed');
+        dispatch(loginFailure("Login Gagal"));
+        toast.error("Login Gagal");
       }
     } catch (error) {
-        dispatch(loginFailure(error.message || 'An error occurred'));
-        toast.error('Login failed');
+      dispatch(loginFailure(error.message || "An error occurred"));
+      toast.error("Login Gagal");
     }
   };
 };

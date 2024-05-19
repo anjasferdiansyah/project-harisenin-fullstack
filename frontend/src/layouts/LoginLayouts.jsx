@@ -33,11 +33,11 @@ function LoginLayouts() {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const { email, password } = formData;
 
-    if(!email || !password){
-      toast.error('Please fill in all fields')
+    if (!email || !password) {
+      toast.error("Email dan username tidak boleh kosong");
       return;
     }
 
