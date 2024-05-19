@@ -1,9 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/organisems/Footer";
 import Navbar from "../components/organisems/Navbar";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useSWR from "swr";
+import { fetchCart } from "../store/action/cartAction";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  const token = sessionStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchCart(token));
+    }
+  }, [dispatch, token]);
+
+  const total = cartItems.reduce((acc, item) => {
+    const price = item.product && item.product.price ? item.product.price : 0;
+    const totalPrice = price * item.qty;
+    return acc + totalPrice;
+  }, 0);
+
   const navigate = useNavigate();
   const handleCheckout = () => {
     toast.success("Payment Successfull 😍!");
@@ -11,109 +31,140 @@ const Checkout = () => {
       navigate("/");
     }, 2000);
   };
+
+  // hook
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  let userData;
+
+  const getToken = sessionStorage.getItem("token");
+  if (getToken) {
+    const decodeToken = (token) => {
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      return JSON.parse(jsonPayload);
+    };
+
+    userData = decodeToken(getToken);
+  }
+
+  useEffect(() => {
+    if (getToken) {
+      setIsLoggedIn(true);
+      setFirstname(userData.firstName);
+      setLastname(userData.lastName);
+      setAddress(userData.address);
+      setPhone(userData.phoneNumber);
+      console.log(phone);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   return (
     <div>
       <Navbar />
       <ToastContainer />
-      <div className="bg-gray-100 text-[#213775] px-4 md:px-10 lg:px-20 xl:px-20 py-10 md:py-20 xl:py-14 rounded-md shadow-md mb-4 mt-10 md:mt-20 md:mx-28 lg:mt-40">
-        <h2 className="pb-2 mb-4 text-2xl md:text-xl lg:text-xl xl:text-2xl font-bold">
-          1. Billing information
-        </h2>
-        <div className="my-4 md:my-8">
-          <div className="flex items-center space-x-4">
-            <label className="font-bold text-xs">
-              <input type="radio" value="husband" className="mr-2" />
-              HUSBAND
-            </label>
-            <label className="font-bold text-xs">
-              <input type="radio" value="wife" className="mr-2 md:ml-8" />
-              WIFE
-            </label>
+      <div className="flex container mx-auto gap-16 my-16 flex-wrap px-4">
+        <div className="container mx-auto border rounded-md p-8 ">
+          <div className="text-[#213775] font-bold">Informasi Kontak</div>
+          <div>
+            {firstname} {lastname}
+          </div>
+          <div className="border-b my-4"></div>
+          <div className="text-[#213775] font-bold">Alamat Pengiriman</div>
+          <div>
+            <span>{address}</span> <span>{phone}</span>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-sm font-semibold">
-          <div className="flex-1">
-            <label>First Name*</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="First Name"
-            />
-            <label className="">E-mail Address*</label>
-            <input
-              type="email"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="E-mail Address"
-            />
-            <label>Zip Code*</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Zip Code"
-            />
-            <label>Street Name*</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Street Name"
-            />
-            <label>Land</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Land"
-            />
-          </div>
-          <div className="flex-1">
-            <label>Surname*</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Surname"
-            />
-            <label>Telephone Number*</label>
-            <input
-              type="tel"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Telephone Number"
-            />
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-2 lg:mb-0">
-              <div>
-                <label>House Number*</label>
-                <input
-                  type="text"
-                  className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-                  placeholder="House Number"
-                />
+
+        <div className="container mx-auto border rounded-md p-12">
+          {cartItems.map((item) => (
+            <li
+              className="flex pt-5 pb-8 border-b border-gray-200"
+              key={item.productId}
+            >
+              <div className="w-28 mr-4">
+                {item.product && item.product.listImage ? (
+                  <img
+                    className="w-full h-full"
+                    src={item.product.listImage[0]}
+                    alt="image"
+                  />
+                ) : (
+                  <div className="w-28 h-28 bg-gray-300" />
+                )}
               </div>
-              <div>
-                <label>Addition</label>
-                <input
-                  type="text"
-                  className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-                  placeholder="Addition"
-                />
+              <div className="flex flex-col w-full ">
+                <div className="flex text-md text-[#213775]">
+                  <p className="font-semibold">
+                    {item.product && item.product.title}
+                  </p>
+                  <div className="mx-auto"></div>
+                  <p className="font-semibold text-md">
+                    Rp
+                    {item.product && item.product.price.toLocaleString("id-ID")}
+                  </p>
+                </div>
+                <div className=" flex m-2 ">
+                  <div className="flex border border-blue-200 w-max">
+                    {/* <div
+                      onClick={() => onClickDecrementQty(item.productId)}
+                      id="decrement"
+                      className="mx-1.5  cursor-pointer font-bold"
+                    >
+                      -
+                    </div> */}
+                    <p className="w-7 text-center border">{item && item.qty}</p>
+
+                    {/* <div
+                      onClick={() => onClickIncrementQty(item.productId)}
+                      id="increment"
+                      className="mx-1.5  cursor-pointer font-bold"
+                    >
+                      +
+                    </div> */}
+                  </div>
+                  {/* <div
+                    onClick={() => onClickRemoveFromCart(item.productId)}
+                    className="ml-5 text-xs my-auto text-gray-500 cursor-pointer"
+                  >
+                    BUANG
+                  </div> */}
+                </div>
               </div>
+            </li>
+          ))}
+          <div className=" text-[#213875] bg-white">
+            <div className="flex my-2 text-xl font-bold">
+              <p>TOTAL</p>
+              <div className="mx-auto"></div>
+              <p>Rp{total.toLocaleString("id-ID")}</p>
             </div>
-            <label>Place</label>
-            <input
-              type="text"
-              className="border p-2 w-full border-blue-900 mt-1 mb-3 h-10"
-              placeholder="Place"
-            />
           </div>
         </div>
-        <div className="text-xs md:text-sm font-extrabold uppercase py-4 md:py-10 tracking-[0.18em]">
-          SEND TO DIFFERENT ADDRESS ?
-        </div>
+
         <button
           onClick={handleCheckout}
           type="submit"
-          className="border text-white text-xs uppercase font-extrabold tracking-[0.18em] bg-[#213775] w-full md:w-52 p-3 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0 "
+          className="text-white text-xs uppercase tracking-[0.18em] bg-[#213775] w-full md:w-52 p-3 relative overflow-hidden transition-all duration-200 ease-in-out hover:text-[#213775] hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#f6ddda] before:to-[#f6ddda] before:transition-all before:duration-200 before:ease-in-out before:z-[-1] hover:before:left-0 "
         >
           Proceed to payment
         </button>
       </div>
+
       <Footer />
     </div>
   );
