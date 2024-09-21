@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import ListProductCard from "../../atoms/ListProductCard";
 
 const Products = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
+  console.log(data)
+
 
   const fetchData = async () => {
     const response = await axios.get(
